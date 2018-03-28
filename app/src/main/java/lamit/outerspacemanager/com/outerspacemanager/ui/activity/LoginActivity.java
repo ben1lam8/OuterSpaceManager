@@ -124,12 +124,12 @@ public class LoginActivity extends AppCompatActivity implements HasActivityInjec
     protected void onActivityResult(int requestCode, int resultCode, Intent createUserIntent){
         if(resultCode == RESULT_CANCELED){
             Timber.d("Signing up abortion");
-            Toast.makeText(this, R.string.login_cancel_creation, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.toast_cancel_create_user, Toast.LENGTH_SHORT).show();
         }else {
             Timber.d("Signing up completed");
             if (requestCode == CREATE_REQUEST) {
 
-                Toast toast = Toast.makeText(getApplicationContext(), R.string.toast_confirm_user_created, Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.toast_confirm_create_user, Toast.LENGTH_LONG);
                 toast.show();
 
                 Credentials credentials = (Credentials) createUserIntent.getSerializableExtra(SignupActivity.CREDENTIALS_EXTRA);

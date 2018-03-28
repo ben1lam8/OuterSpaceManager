@@ -2,6 +2,7 @@ package lamit.outerspacemanager.com.outerspacemanager.repository;
 
 
 import android.arch.lifecycle.LiveData;
+import android.content.Context;
 
 import com.google.gson.Gson;
 
@@ -25,12 +26,14 @@ import timber.log.Timber;
 
 public class BuildingRepository {
 
+    private final Context appContext;
     private final APIClient apiClient;
     private final BuildingDao buildingDao;
     private final Executor executor;
 
     @Inject
-    public BuildingRepository(APIClient apiClient, BuildingDao buildingDao, Executor executor) {
+    public BuildingRepository(Context appContext, APIClient apiClient, BuildingDao buildingDao, Executor executor) {
+        this.appContext = appContext;
         this.apiClient = apiClient;
         this.buildingDao = buildingDao;
         this.executor = executor;

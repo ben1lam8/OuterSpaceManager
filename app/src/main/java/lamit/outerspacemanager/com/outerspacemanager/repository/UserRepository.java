@@ -81,17 +81,17 @@ public class UserRepository {
                             );
 
                             userDao.save(newUser);
-                            Toast.makeText(appContext, appContext.getString(R.string.toast_confirm_user_created), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(appContext, appContext.getString(R.string.toast_confirm_create_user, credentials.getUsername()), Toast.LENGTH_SHORT).show();
                         });
                     }else{
                         try{
                             SimpleAPIErrorResponse error = new Gson().fromJson(response.errorBody().string(), SimpleAPIErrorResponse.class);
 
-                            String errorMessage = appContext.getString(R.string.toast_infirm_create_building_message, error.getMessage());
+                            String errorMessage = appContext.getString(R.string.toast_infirm_create_user_apimessage, error.getMessage());
                             Toast.makeText(appContext, errorMessage, Toast.LENGTH_LONG).show();
 
                         }catch(IOException e){
-                            Toast.makeText(appContext, appContext.getString(R.string.toast_infirm_create_default), Toast.LENGTH_LONG).show();
+                            Toast.makeText(appContext, appContext.getString(R.string.toast_infirm_create_user_exception, e.getMessage()), Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -99,6 +99,7 @@ public class UserRepository {
                 @Override
                 public void onFailure(Call<Token> call, Throwable t) {
                     Timber.d(t, "An error occurred while trying to create a new user");
+                    Toast.makeText(appContext, appContext.getString(R.string.toast_infirm_create_user_default), Toast.LENGTH_LONG).show();
                 }
             });
         });
@@ -143,16 +144,18 @@ public class UserRepository {
 
                                 userDao.save(newUser);
                             }
+
+                            Toast.makeText(appContext, appContext.getString(R.string.toast_confirm_fetch_user_token, credentials.getUsername()), Toast.LENGTH_SHORT).show();
                         });
                     }else{
                         try{
                             SimpleAPIErrorResponse error = new Gson().fromJson(response.errorBody().string(), SimpleAPIErrorResponse.class);
 
-                            //String errorMessage = ctx.getResources().getString(R.string.toast_infirm_create_building_message, error.getMessage());
-                            //Toast.makeText(app.getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+                            String errorMessage = appContext.getString(R.string.toast_infirm_fetch_user_token_apimessage, error.getMessage());
+                            Toast.makeText(appContext, errorMessage, Toast.LENGTH_LONG).show();
 
                         }catch(IOException e){
-                            //Toast.makeText(app.getApplicationContext(), R.string.toast_infirm_create_default, Toast.LENGTH_LONG).show();
+                            Toast.makeText(appContext, appContext.getString(R.string.toast_infirm_fetch_user_token_exception, e.getMessage()), Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -160,6 +163,7 @@ public class UserRepository {
                 @Override
                 public void onFailure(Call<Token> call, Throwable t) {
                     Timber.d(t, "An error occurred while trying to fetch a token");
+                    Toast.makeText(appContext, appContext.getString(R.string.toast_infirm_fetch_user_token_default), Toast.LENGTH_LONG).show();
                 }
             });
         });
@@ -190,16 +194,17 @@ public class UserRepository {
                             user.setLastRefresh(new Date());
 
                             userDao.save(user);
+                            Toast.makeText(appContext, appContext.getString(R.string.toast_confirm_fetch_user, user.getUsername()), Toast.LENGTH_SHORT).show();
                         });
                     }else{
                         try{
                             SimpleAPIErrorResponse error = new Gson().fromJson(response.errorBody().string(), SimpleAPIErrorResponse.class);
 
-                            //String errorMessage = ctx.getResources().getString(R.string.toast_infirm_create_building_message, error.getMessage());
-                            //Toast.makeText(app.getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+                            String errorMessage = appContext.getString(R.string.toast_infirm_fetch_user_apimessage, user.getUsername(), error.getMessage());
+                            Toast.makeText(appContext, errorMessage, Toast.LENGTH_LONG).show();
 
                         }catch(IOException e){
-                            //Toast.makeText(app.getApplicationContext(), R.string.toast_infirm_create_default, Toast.LENGTH_LONG).show();
+                            Toast.makeText(appContext, appContext.getString(R.string.toast_infirm_fetch_user_exception, user.getUsername(), e.getMessage()), Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -207,6 +212,7 @@ public class UserRepository {
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
                     Timber.d(t, "An error occurred while trying to fetch fresh user stats");
+                    Toast.makeText(appContext, appContext.getString(R.string.toast_infirm_fetch_user_default, user.getUsername()), Toast.LENGTH_LONG).show();
                 }
             });
         });

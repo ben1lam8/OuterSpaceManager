@@ -84,20 +84,20 @@ public class AppModule {
 
     @Provides
     @Singleton
-    BuildingRepository provideBuildingRepository(APIClient apiClient, BuildingDao buildingDao, Executor executor) {
-        return new BuildingRepository(apiClient, buildingDao, executor);
+    BuildingRepository provideBuildingRepository(@AppContext Context appContext, APIClient apiClient, BuildingDao buildingDao, Executor executor) {
+        return new BuildingRepository(appContext, apiClient, buildingDao, executor);
     }
 
     @Provides
     @Singleton
-    ShipRepository provideShipRepository(APIClient apiClient, ShipDao shipDao, Executor executor) {
-        return new ShipRepository(apiClient, shipDao, executor);
+    ShipRepository provideShipRepository(@AppContext Context appContext, APIClient apiClient, ShipDao shipDao, Executor executor) {
+        return new ShipRepository(appContext, apiClient, shipDao, executor);
     }
 
     @Provides
     @Singleton
-    SearchRepository provideSearchRepository(APIClient apiClient, SearchDao searchDao, Executor executor) {
-        return new SearchRepository(apiClient, searchDao, executor);
+    SearchRepository provideSearchRepository(@AppContext Context appContext, APIClient apiClient, SearchDao searchDao, Executor executor) {
+        return new SearchRepository(appContext, apiClient, searchDao, executor);
     }
 
     // --- PROVIDE NETWORK FACTORIES ---

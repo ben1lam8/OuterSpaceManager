@@ -14,7 +14,7 @@ import lamit.outerspacemanager.com.outerspacemanager.di.module.AppModule;
 import lamit.outerspacemanager.com.outerspacemanager.di.builder.FragmentBuilder;
 
 @Singleton
-@Component(modules={AndroidInjectionModule.class, ActivityBuilder.class, FragmentBuilder.class, AppModule.class})
+@Component(modules={AndroidInjectionModule.class, AppModule.class, ActivityBuilder.class, FragmentBuilder.class})
 public interface AppComponent {
 
     void inject(OuterSpaceManager outerSpaceManager);

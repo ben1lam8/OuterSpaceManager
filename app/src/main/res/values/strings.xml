@@ -23,10 +23,6 @@
     <string name="signup_email_textview">Courriel</string>
     <string name="signup_email_edittext_hint">name@service.mail</string>
     <string name="create">Créer</string>
-    <string name="toast_confirm_user_created">Compte créé !</string>
-    <string name="toast_infirm_connection">Connexion impossible.</string>
-    <string name="login_cancel_creation">Inscription annulée</string>
-    <string name="toast_infirm_fetch_user">Les données du joueur n\'ont pu être récupérées</string>
     <string name="building_item_level">Lvl %1$d</string>
     <string name="building_item_gas">Gas : %1$d</string>
     <string name="building_item_mineral">Mineral : %1$d</string>
@@ -39,8 +35,23 @@
     <string name="ship_item_gas">Gas : %1$d</string>
     <string name="ship_item_mineral">Mineral : %1$d</string>
     <string name="ship_item_spatioport">Spatioport level needed : %1$d</string>
-    <string name="toast_confirm_create">Construction lancée !</string>
-    <string name="toast_infirm_create_default">Construction impossible !</string>
+
+    <string name="toast_confirm_create_building">Construction lancée !</string>
+    <string name="toast_confirm_create_user">Compte «%1$s» créé !</string>
+    <string name="toast_confirm_fetch_user_token">%1$s est connecté</string>
+    <string name="toast_confirm_fetch_user">Données de %1$s synchronisées</string>
+    <string name="toast_cancel_create_user">Inscription annulée</string>
+    <string name="toast_infirm_create_user_exception">Création de compte impossible (%1$s)</string>
+    <string name="toast_infirm_create_user_apimessage">Création de compte impossible (%1$s)</string>
+    <string name="toast_infirm_create_user_default">Création de compte impossible</string>
+    <string name="toast_infirm_fetch_user_token_apimessage">Connexion impossible (%1$s)</string>
+    <string name="toast_infirm_fetch_user_token_exception">Connexion impossible (%1$s)</string>
+    <string name="toast_infirm_fetch_user_token_default">Connexion impossible</string>
+    <string name="toast_infirm_fetch_user_apimessage">Synchronisation des données de %1$s impossible (%2$s)</string>
+    <string name="toast_infirm_fetch_user_exception">Synchronisation des données de %1$s impossible (%2$s)</string>
+    <string name="toast_infirm_fetch_user_default">Synchronisation des données de %1$s impossible</string>
+
+    <string name="toast_infirm_create_default">Création impossible !</string>
     <string name="toast_infirm_response_null">Réponse «null» …</string>
     <string name="toast_infirm_create_building_message">Construction impossible (%1$s)</string>
     <string name="toast_infirm_create_building_not_found">Ce bâtiment n\'existe pas</string>
@@ -50,6 +61,7 @@
     <string name="toast_infirm_create_building_invalid_token">Authentification du joueur impossible</string>
     <string name="toast_infirm_create_building_bad_response">Le serveur n\'a pas pu traîter la requête</string>
     <string name="toast_infirm_create_building_internal_error">Une erreur serveur est survenue</string>
+
     <string name="toast_infirm_create_ship_message">Construction impossible (%1$s)</string>
     <string name="toast_infirm_create_ship_not_found">Ce vaisseau n\'existe pas</string>
     <string name="toast_infirm_create_ship_invalid_request">Requête invalide</string>
@@ -58,8 +70,10 @@
     <string name="toast_infirm_create_ship_invalid_token">Authentification du joueur impossible</string>
     <string name="toast_infirm_create_ship_bad_response">Le serveur n\'a pas pu traîter la requête</string>
     <string name="toast_infirm_create_ship_internal_error">Une erreur serveur est survenue</string>
+
     <string name="toast_infirm_fetch_buildings">Les données des bâtiments n\'ont pu être récupérées</string>
     <string name="toast_infirm_fetch_ships">Les données des vaisseaux n\'ont pu être récupérées</string>
+
     <string name="userstats_username_textview">Username</string>
     <string name="userstats_score_textview">Total score : %1$d pts</string>
     <string name="userstats_gas_textview">Available resources</string>
@@ -68,7 +82,7 @@
     <string name="userstats_mineral_amount_textview">Mineral : %1$d</string>
     <string name="userstats_mineral_multiplier_textview">(multiplier : %1$d)</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_main_refresh">Refresh</string>
+
+
 </resources>

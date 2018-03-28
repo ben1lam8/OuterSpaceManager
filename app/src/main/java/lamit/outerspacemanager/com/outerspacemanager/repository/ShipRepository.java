@@ -2,6 +2,7 @@ package lamit.outerspacemanager.com.outerspacemanager.repository;
 
 
 import android.arch.lifecycle.LiveData;
+import android.content.Context;
 
 import com.google.gson.Gson;
 
@@ -26,12 +27,14 @@ import timber.log.Timber;
 
 public class ShipRepository {
 
+    private final Context appContext;
     private final APIClient apiClient;
     private final ShipDao shipDao;
     private final Executor executor;
 
     @Inject
-    public ShipRepository(APIClient apiClient, ShipDao shipDao, Executor executor) {
+    public ShipRepository(Context appContext, APIClient apiClient, ShipDao shipDao, Executor executor) {
+        this.appContext = appContext;
         this.apiClient = apiClient;
         this.shipDao = shipDao;
         this.executor = executor;
