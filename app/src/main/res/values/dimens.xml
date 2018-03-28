@@ -1,0 +1,9 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="main_buttons_marginTop">16dp</dimen>
+    <dimen name="building_list_item_text_margin_start">8dp</dimen>
+    <dimen name="ship_list_item_text_margin_start">8dp</dimen>
+    <dimen name="userstats_resources_margin_top">32dp</dimen>
+    <dimen name="global_text_paragraph_interline">12dp</dimen>
+    <dimen name="login_edittext_width">350dp</dimen>
+</resources>

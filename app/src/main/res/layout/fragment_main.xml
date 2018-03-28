@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="lamit.outerspacemanager.com.outerspacemanager.ui.activity.MainActivity">
+
+    <TextView
+        android:id="@+id/main_username_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/main_username_textview"
+        android:gravity="center"
+        android:textSize="32sp"/>
+
+    <TextView
+        android:id="@+id/main_score_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/main_score_textview"
+        android:gravity="center"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/main_buildings_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_buttons_marginTop"
+        android:text="@string/main_show_buildings_button"/>
+
+    <Button
+        android:id="@+id/main_lab_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/main_show_lab_button"/>
+
+    <Button
+        android:id="@+id/main_shipyard_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/main_show_shipyard_button"/>
+
+    <Button
+        android:id="@+id/main_galaxy_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/main_show_galaxy_button"/>
+
+</LinearLayout>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp">
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:id="@+id/building_item_icon_imageview"
+            android:src="@drawable/default_factory"/>
+
+        <TextView
+            android:id="@+id/building_item_level_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:text="Level"
+            />
+
+        <TextView
+            android:id="@+id/building_item_time_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="10dp"
+            android:text="UPGRADE (xxx s)"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/building_list_item_text_margin_start"
+        android:layout_marginLeft="@dimen/building_list_item_text_margin_start"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/building_item_name_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="24dp"
+            android:textAllCaps="true"
+            android:text="Name"
+            />
+
+        <TextView
+            android:id="@+id/building_item_stats_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:text="On next level"
+            />
+
+        <TextView
+            android:id="@+id/building_item_effect_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="16dp"
+            android:text="effect : +xxx"
+            />
+
+
+        <TextView
+            android:id="@+id/building_item_price_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:text="Price for next level"
+            />
+
+        <TextView
+            android:id="@+id/building_item_gas_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="16dp"
+            android:text="Gas : xxx"
+            />
+
+        <TextView
+            android:id="@+id/building_item_mineral_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="16dp"
+            android:text="Mineral : xxx"
+            />
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

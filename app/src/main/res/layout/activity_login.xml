@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="lamit.outerspacemanager.com.outerspacemanager.ui.activity.LoginActivity"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/login_login_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/login_loginrow_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/login_login_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_identifier_textview"/>
+
+            <EditText
+                android:id="@+id/login_login_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_identifier_edittext_hint" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/login_passwordrow_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/login_password_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_password_textview"/>
+
+            <EditText
+                android:id="@+id/login_password_edittext"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_password_edittext_hint" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/login_validate_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/validate"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/login_newrow_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/login_new_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_new_textview"/>
+
+        <Button
+            android:id="@+id/login_new_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_new_button"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
