@@ -2,6 +2,9 @@ package lamit.outerspacemanager.com.outerspacemanager.repository;
 
 
 import android.arch.lifecycle.LiveData;
+import android.content.Context;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.Calendar;
@@ -9,12 +12,14 @@ import java.util.Date;
 import java.util.concurrent.Executor;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import lamit.outerspacemanager.com.outerspacemanager.datasource.api.SimpleAPIErrorResponse;
-import lamit.outerspacemanager.com.outerspacemanager.datasource.room.UserDao;
+
+import lamit.outerspacemanager.com.outerspacemanager.R;
+import lamit.outerspacemanager.com.outerspacemanager.data.api.SimpleAPIErrorResponse;
+import lamit.outerspacemanager.com.outerspacemanager.data.room.UserDao;
 import lamit.outerspacemanager.com.outerspacemanager.model.Credentials;
 import lamit.outerspacemanager.com.outerspacemanager.model.Token;
 import lamit.outerspacemanager.com.outerspacemanager.model.User;
-import lamit.outerspacemanager.com.outerspacemanager.datasource.api.APIClient;
+import lamit.outerspacemanager.com.outerspacemanager.data.api.APIClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,12 +30,14 @@ public class UserRepository {
 
     private static int FRESHNESS_TIMEOUT_IN_SECONDS = 30;
 
+    private final Context appContext;
     private final APIClient apiClient;
     private final UserDao userDao;
     private final Executor executor;
 
     @Inject
-    public UserRepository(APIClient apiClient, UserDao userDao, Executor executor) {
+    public UserRepository(Context appContext, APIClient apiClient, UserDao userDao, Executor executor) {
+        this.appContext = appContext;
         this.apiClient = apiClient;
         this.userDao = userDao;
         this.executor = executor;
@@ -74,16 +81,17 @@ public class UserRepository {
                             );
 
                             userDao.save(newUser);
+                            Toast.makeText(appContext, appContext.getString(R.string.toast_confirm_user_created), Toast.LENGTH_SHORT).show();
                         });
                     }else{
                         try{
                             SimpleAPIErrorResponse error = new Gson().fromJson(response.errorBody().string(), SimpleAPIErrorResponse.class);
 
-                            //String errorMessage = ctx.getResources().getString(R.string.toast_infirm_create_building_message, error.getMessage());
-                            //Toast.makeText(app.getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+                            String errorMessage = appContext.getString(R.string.toast_infirm_create_building_message, error.getMessage());
+                            Toast.makeText(appContext, errorMessage, Toast.LENGTH_LONG).show();
 
                         }catch(IOException e){
-                            //Toast.makeText(app.getApplicationContext(), R.string.toast_infirm_create_default, Toast.LENGTH_LONG).show();
+                            Toast.makeText(appContext, appContext.getString(R.string.toast_infirm_create_default), Toast.LENGTH_LONG).show();
                         }
                     }
                 }

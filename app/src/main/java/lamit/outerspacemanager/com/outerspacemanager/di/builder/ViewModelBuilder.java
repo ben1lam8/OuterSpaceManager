@@ -1,4 +1,4 @@
-package lamit.outerspacemanager.com.outerspacemanager.di;
+package lamit.outerspacemanager.com.outerspacemanager.di.builder;
 
 
 import android.arch.lifecycle.ViewModel;
@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
+import lamit.outerspacemanager.com.outerspacemanager.di.annotation.ViewModelKey;
 import lamit.outerspacemanager.com.outerspacemanager.viewmodel.BuildingsViewModel;
 import lamit.outerspacemanager.com.outerspacemanager.viewmodel.GalaxyViewModel;
 import lamit.outerspacemanager.com.outerspacemanager.viewmodel.LoginViewModel;
@@ -16,7 +17,7 @@ import lamit.outerspacemanager.com.outerspacemanager.viewmodel.SignupViewModel;
 import lamit.outerspacemanager.com.outerspacemanager.viewmodel.ViewModelFactory;
 
 @Module
-public abstract class ViewModelModule {
+public abstract class ViewModelBuilder {
 
     @Binds
     @IntoMap

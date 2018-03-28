@@ -9,7 +9,7 @@ import dagger.android.HasActivityInjector;
 import timber.log.Timber;
 
 // Compiled import (if this import fails, try to rebuild)
-import lamit.outerspacemanager.com.outerspacemanager.di.DaggerAppComponent;
+import lamit.outerspacemanager.com.outerspacemanager.di.component.DaggerAppComponent;
 
 public class OuterSpaceManager extends Application implements HasActivityInjector {
 

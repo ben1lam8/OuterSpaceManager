@@ -1,4 +1,4 @@
-package lamit.outerspacemanager.com.outerspacemanager.datasource.room;
+package lamit.outerspacemanager.com.outerspacemanager.data.room;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.TypeConverters;

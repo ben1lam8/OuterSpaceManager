@@ -5,8 +5,8 @@ import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 
-import lamit.outerspacemanager.com.outerspacemanager.datasource.api.APIClient;
-import lamit.outerspacemanager.com.outerspacemanager.datasource.room.SearchDao;
+import lamit.outerspacemanager.com.outerspacemanager.data.api.APIClient;
+import lamit.outerspacemanager.com.outerspacemanager.data.room.SearchDao;
 
 public class SearchRepository {
 

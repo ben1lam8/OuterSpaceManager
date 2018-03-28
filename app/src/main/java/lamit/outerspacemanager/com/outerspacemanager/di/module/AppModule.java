@@ -1,8 +1,9 @@
-package lamit.outerspacemanager.com.outerspacemanager.di;
+package lamit.outerspacemanager.com.outerspacemanager.di.module;
 
 
 import android.app.Application;
 import android.arch.persistence.room.Room;
+import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,12 +17,14 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import lamit.outerspacemanager.com.outerspacemanager.datasource.api.APIClient;
-import lamit.outerspacemanager.com.outerspacemanager.datasource.room.BuildingDao;
-import lamit.outerspacemanager.com.outerspacemanager.datasource.room.RoomDatabase;
-import lamit.outerspacemanager.com.outerspacemanager.datasource.room.SearchDao;
-import lamit.outerspacemanager.com.outerspacemanager.datasource.room.ShipDao;
-import lamit.outerspacemanager.com.outerspacemanager.datasource.room.UserDao;
+import lamit.outerspacemanager.com.outerspacemanager.data.api.APIClient;
+import lamit.outerspacemanager.com.outerspacemanager.data.room.BuildingDao;
+import lamit.outerspacemanager.com.outerspacemanager.data.room.RoomDatabase;
+import lamit.outerspacemanager.com.outerspacemanager.data.room.SearchDao;
+import lamit.outerspacemanager.com.outerspacemanager.data.room.ShipDao;
+import lamit.outerspacemanager.com.outerspacemanager.data.room.UserDao;
+import lamit.outerspacemanager.com.outerspacemanager.di.annotation.AppContext;
+import lamit.outerspacemanager.com.outerspacemanager.di.builder.ViewModelBuilder;
 import lamit.outerspacemanager.com.outerspacemanager.repository.BuildingRepository;
 import lamit.outerspacemanager.com.outerspacemanager.repository.SearchRepository;
 import lamit.outerspacemanager.com.outerspacemanager.repository.ShipRepository;
@@ -29,8 +32,16 @@ import lamit.outerspacemanager.com.outerspacemanager.repository.UserRepository;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module(includes = ViewModelModule.class)
+@Module(includes = ViewModelBuilder.class)
 public class AppModule {
+
+    @Provides
+    @AppContext
+    @Singleton
+    Context provideAppContext(Application application) {
+        return application;
+    }
+
     // --- PROVIDE DATABASE FACTORIES ---
 
     @Provides
@@ -67,8 +78,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    UserRepository provideUserRepository(APIClient apiClient, UserDao userDao, Executor executor) {
-        return new UserRepository(apiClient, userDao, executor);
+    UserRepository provideUserRepository(@AppContext Context appContext, APIClient apiClient, UserDao userDao, Executor executor) {
+        return new UserRepository(appContext, apiClient, userDao, executor);
     }
 
     @Provides

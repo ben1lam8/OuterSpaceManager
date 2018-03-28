@@ -1,4 +1,4 @@
-package lamit.outerspacemanager.com.outerspacemanager.datasource.api;
+package lamit.outerspacemanager.com.outerspacemanager.data.api;
 
 
 public class SimpleAPIErrorResponse {

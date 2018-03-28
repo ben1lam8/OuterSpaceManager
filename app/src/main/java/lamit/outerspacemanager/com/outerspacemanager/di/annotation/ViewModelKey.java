@@ -1,4 +1,4 @@
-package lamit.outerspacemanager.com.outerspacemanager.di;
+package lamit.outerspacemanager.com.outerspacemanager.di.annotation;
 
 
 import android.arch.lifecycle.ViewModel;

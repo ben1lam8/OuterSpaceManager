@@ -1,4 +1,4 @@
-package lamit.outerspacemanager.com.outerspacemanager.di;
+package lamit.outerspacemanager.com.outerspacemanager.di.builder;
 
 
 import dagger.Module;
@@ -12,7 +12,7 @@ import lamit.outerspacemanager.com.outerspacemanager.ui.activity.ShipyardActivit
 import lamit.outerspacemanager.com.outerspacemanager.ui.activity.SignupActivity;
 
 @Module
-public abstract class ActivityModule {
+public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector()
     abstract LoginActivity contributeLoginActivity();
@@ -20,18 +20,18 @@ public abstract class ActivityModule {
     @ContributesAndroidInjector()
     abstract SignupActivity contributeSignupActivity();
 
-    @ContributesAndroidInjector(modules = FragmentModule.class)
+    @ContributesAndroidInjector(modules = FragmentBuilder.class)
     abstract MainActivity contributeMainActivity();
 
-    @ContributesAndroidInjector(modules = FragmentModule.class)
+    @ContributesAndroidInjector(modules = FragmentBuilder.class)
     abstract BuildingsActivity contributeBuildingsActivity();
 
-    @ContributesAndroidInjector(modules = FragmentModule.class)
+    @ContributesAndroidInjector(modules = FragmentBuilder.class)
     abstract SearchesActivity contributeSearchesActivity();
 
-    @ContributesAndroidInjector(modules = FragmentModule.class)
+    @ContributesAndroidInjector(modules = FragmentBuilder.class)
     abstract ShipyardActivity contributeShipyardActivity();
 
-    @ContributesAndroidInjector(modules = FragmentModule.class)
+    @ContributesAndroidInjector(modules = FragmentBuilder.class)
     abstract GalaxyActivity contributeGalaxyActivity();
 }

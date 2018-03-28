@@ -1,4 +1,4 @@
-package lamit.outerspacemanager.com.outerspacemanager.di;
+package lamit.outerspacemanager.com.outerspacemanager.di.builder;
 
 
 import dagger.Module;
@@ -10,7 +10,7 @@ import lamit.outerspacemanager.com.outerspacemanager.ui.fragment.SearchesFragmen
 import lamit.outerspacemanager.com.outerspacemanager.ui.fragment.ShipyardFragment;
 
 @Module
-public abstract class FragmentModule {
+public abstract class FragmentBuilder {
 
     @ContributesAndroidInjector
     abstract MainFragment contributeMainFragment();
