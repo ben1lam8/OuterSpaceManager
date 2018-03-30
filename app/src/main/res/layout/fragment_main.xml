@@ -10,7 +10,7 @@
         android:id="@+id/main_username_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/main_username_textview"
+        tools:text="@string/main_username_textview"
         android:gravity="center"
         android:textSize="32sp"/>
 
@@ -18,9 +18,66 @@
         android:id="@+id/main_score_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/main_score_textview"
+        tools:text="@string/main_score_textview"
         android:gravity="center"
         android:textSize="16sp"/>
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="0,1"
+        android:layout_marginTop="@dimen/main_resources_marginTop">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/minerals_imageview_side"
+                android:layout_height="@dimen/minerals_imageview_side"
+                android:contentDescription="@string/main_minerals_imageview"
+                android:src="@drawable/minerals" />
+
+            <ImageView
+                android:layout_width="@dimen/gas_imageview_side"
+                android:layout_height="@dimen/gas_imageview_side"
+                android:contentDescription="@string/main_gas_imageview"
+                android:src="@drawable/gas" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/main_minerals_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                tools:text="xxxxx"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/main_gas_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                tools:text="xxxxx"
+                android:textSize="16sp" />
+        </TableRow>
+
+    </TableLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="2">
+
+    </GridLayout>
 
     <Button
         android:id="@+id/main_buildings_button"

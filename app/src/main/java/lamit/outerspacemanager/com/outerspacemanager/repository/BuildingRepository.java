@@ -3,6 +3,7 @@ package lamit.outerspacemanager.com.outerspacemanager.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -12,6 +13,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
 import javax.inject.Inject;
+
+import lamit.outerspacemanager.com.outerspacemanager.R;
 import lamit.outerspacemanager.com.outerspacemanager.data.api.APIClient;
 import lamit.outerspacemanager.com.outerspacemanager.data.api.SimpleAPIErrorResponse;
 import lamit.outerspacemanager.com.outerspacemanager.data.api.SimpleAPIResponse;
@@ -63,16 +66,18 @@ public class BuildingRepository {
                             for(Building building : buildingsList.getBuildings()){
                                 buildingDao.save(building);
                             }
+
+                            Toast.makeText(appContext, appContext.getString(R.string.toast_confirm_fetch_buildings), Toast.LENGTH_SHORT).show();
                         });
                     }else{
                         try{
                             SimpleAPIErrorResponse error = new Gson().fromJson(response.errorBody().string(), SimpleAPIErrorResponse.class);
 
-                            //String errorMessage = ctx.getResources().getString(R.string.toast_infirm_create_building_message, error.getMessage());
-                            //Toast.makeText(app.getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+                            String errorMessage = appContext.getString(R.string.toast_infirm_fetch_buildings_apimessage, error.getMessage());
+                            Toast.makeText(appContext, errorMessage, Toast.LENGTH_LONG).show();
 
                         }catch(IOException e){
-                            //Toast.makeText(app.getApplicationContext(), R.string.toast_infirm_create_default, Toast.LENGTH_LONG).show();
+                            Toast.makeText(appContext, appContext.getString(R.string.toast_infirm_fetch_buildings_exception, e.getMessage()), Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -80,6 +85,7 @@ public class BuildingRepository {
                 @Override
                 public void onFailure(Call<BuildingsList> call, Throwable t) {
                     Timber.d(t, "An error occurred while trying to refresh buildings");
+                    Toast.makeText(appContext, appContext.getString(R.string.toast_infirm_fetch_buildings_default), Toast.LENGTH_LONG).show();
                 }
 
             });
@@ -117,20 +123,35 @@ public class BuildingRepository {
                                 building.setConstructionFinish(contructionFinish);
 
                                 buildingDao.save(building);
+                                Toast.makeText(appContext, appContext.getString(R.string.toast_confirm_create_building), Toast.LENGTH_SHORT).show();
                             }else{
                                 Timber.d("Cannot create building. API Code : %s", simpleAPIResponse.getCode());
-                                //Print Error
+
+                                /*String errorMessage = null;
+
+                                switch(simpleAPIResponse.getCode()){
+                                    case "401":
+                                        errorMessage = appContext.getString(R.string.toast_infirm_create_);
+                                        break;
+                                    case "403":
+                                        break;
+                                    case "500":
+                                        break;
+                                    default:
+                                }
+                                 appContext.getString(R.string.toast_infirm_create_building_apimessage, simpleAPIResponse.g);
+                                Toast.makeText(appContext, errorMessage, Toast.LENGTH_LONG).show();*/
                             }
                         });
                     }else{
                         try{
                             SimpleAPIErrorResponse error = new Gson().fromJson(response.errorBody().string(), SimpleAPIErrorResponse.class);
 
-                            //String errorMessage = ctx.getResources().getString(R.string.toast_infirm_create_building_message, error.getMessage());
-                            //Toast.makeText(app.getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+                            String errorMessage = appContext.getString(R.string.toast_infirm_create_building_apimessage, error.getMessage());
+                            Toast.makeText(appContext, errorMessage, Toast.LENGTH_LONG).show();
 
                         }catch(IOException e){
-                            //Toast.makeText(app.getApplicationContext(), R.string.toast_infirm_create_default, Toast.LENGTH_LONG).show();
+                            Toast.makeText(appContext, appContext.getString(R.string.toast_infirm_create_building_exception, e.getMessage()), Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -138,6 +159,7 @@ public class BuildingRepository {
                 @Override
                 public void onFailure(Call<SimpleAPIResponse> call, Throwable t) {
                     Timber.d(t, "An error occurred while trying to create building %s", building.getName());
+                    Toast.makeText(appContext, appContext.getString(R.string.toast_infirm_create_building_default), Toast.LENGTH_LONG).show();
                 }
 
             });

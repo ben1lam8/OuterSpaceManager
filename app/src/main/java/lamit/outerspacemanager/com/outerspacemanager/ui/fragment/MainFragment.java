@@ -35,6 +35,8 @@ public class MainFragment extends Fragment {
 
     @BindView(R.id.main_username_textview)  TextView usernameTextView;
     @BindView(R.id.main_score_textview)     TextView scoreTextView;
+    @BindView(R.id.main_minerals_textview)  TextView mineralsTextView;
+    @BindView(R.id.main_gas_textview)       TextView gasTextView;
     @BindView(R.id.main_buildings_button)   Button buildingsButton;
     @BindView(R.id.main_lab_button)         Button labButton;
     @BindView(R.id.main_shipyard_button)    Button shipyardButton;
@@ -88,9 +90,14 @@ public class MainFragment extends Fragment {
     }
 
     private void updateUI(User user){
+
+        if (user == null) return;
+
         Timber.d("Update UI");
         this.usernameTextView.setText(getString(R.string.main_username_textview, user.getUsername()));
         this.scoreTextView.setText(getString(R.string.main_score_textview, user.getPoints()));
+        this.mineralsTextView.setText(String.valueOf((int) user.getMinerals()));
+        this.gasTextView.setText(String.valueOf((int) user.getGas()));
     }
 
     @OnClick(R.id.main_buildings_button)

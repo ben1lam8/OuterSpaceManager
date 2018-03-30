@@ -47,6 +47,13 @@ public class MainViewModel extends ViewModel{
         userRepo.fetchUser(this.user.getValue());
     }
 
+    public void disconnect(){
+        if(this.user.getValue() == null) return;
+        userRepo.disconnectUser(this.user.getValue());
+
+        Timber.d("%s disconnected", this.user.getValue().getUsername());
+    }
+
     public MutableLiveData<Fragment> getCurrentDetailFragment(){
         return this.currentDetailFragment;
     }

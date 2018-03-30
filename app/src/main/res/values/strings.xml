@@ -1,15 +1,36 @@
 <resources>
+
+    <!-- APP -->
+
     <string name="app_name">Outer Space Manager</string>
-    <string name="validate">valider</string>
-    <string name="signup_identifier_textview">Identifiant</string>
-    <string name="signup_identifier_edittext_hint">identifiant</string>
-    <string name="signup_password_textview">Mot de passe</string>
-    <string name="signup_password_edittext_hint">mot de passe</string>
+    <string name="validate">Valider</string>
+    <string name="create">Créer</string>
+
+    <!-- MENUS -->
+
+    <string name="menu_main_refresh">Rafraîchir</string>
+    <string name="menu_main_disconnect">Déconnecter</string>
+
+    <!-- ACTIVITY/FRAGMENT/ITEM : Login -->
+
     <string name="login_identifier_textview">Identifiant</string>
     <string name="login_identifier_edittext_hint">identifiant</string>
     <string name="login_password_textview">Mode de passe</string>
     <string name="login_password_edittext_hint">mot de passe</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="login_new_textview">Pas encore de compte ?</string>
+    <string name="login_new_button">Créer</string>
+
+    <!-- ACTIVITY/FRAGMENT/ITEM : Signup -->
+
+    <string name="signup_identifier_textview">Identifiant</string>
+    <string name="signup_identifier_edittext_hint">identifiant</string>
+    <string name="signup_password_textview">Mot de passe</string>
+    <string name="signup_password_edittext_hint">mot de passe</string>
+    <string name="signup_email_textview">Courriel</string>
+    <string name="signup_email_edittext_hint">name@service.mail</string>
+
+    <!-- ACTIVITY/FRAGMENT/ITEM : Main -->
+
     <string name="main_show_map_button">Vue Générale</string>
     <string name="main_show_buildings_button">Bâtiments</string>
     <string name="main_show_fleet_button">Flotte</string>
@@ -18,16 +39,21 @@
     <string name="main_show_galaxy_button">Galaxie</string>
     <string name="main_username_textview">%1$s</string>
     <string name="main_score_textview">%1$d pts</string>
-    <string name="login_new_textview">Pas encore de compte ?</string>
-    <string name="login_new_button">Créer</string>
-    <string name="signup_email_textview">Courriel</string>
-    <string name="signup_email_edittext_hint">name@service.mail</string>
-    <string name="create">Créer</string>
+
+    <!-- ACTIVITY/FRAGMENT/ITEM : Buildings -->
+
     <string name="building_item_level">Lvl %1$d</string>
     <string name="building_item_gas">Gas : %1$d</string>
     <string name="building_item_mineral">Mineral : %1$d</string>
     <string name="building_item_effect">%1$s : +%2$d</string>
     <string name="building_item_time">UPGRADE (%1$d sec)</string>
+
+    <!-- ACTIVITY/FRAGMENT/ITEM : Searches -->
+
+
+
+    <!-- ACTIVITY/FRAGMENT/ITEM : Shipyard -->
+
     <string name="ship_item_life">Life : %1$d HP</string>
     <string name="ship_item_shield">Shield : %1$d HP</string>
     <string name="ship_item_attack">Attack : %1$d-%2$d HP</string>
@@ -36,8 +62,18 @@
     <string name="ship_item_mineral">Mineral : %1$d</string>
     <string name="ship_item_spatioport">Spatioport level needed : %1$d</string>
 
-    <string name="toast_confirm_create_building">Construction lancée !</string>
-    <string name="toast_confirm_create_user">Compte «%1$s» créé !</string>
+    <!-- ACTIVITY/FRAGMENT/ITEM : Galaxy -->
+
+
+
+    <!-- API -->
+
+    <string name="toast_infirm_create_default">Création impossible !</string>
+    <string name="toast_infirm_response_null">Réponse «null» …</string>
+
+    <!-- API : User -->
+
+    <string name="toast_confirm_create_user">Compte « %1$s » créé !</string>
     <string name="toast_confirm_fetch_user_token">%1$s est connecté</string>
     <string name="toast_confirm_fetch_user">Données de %1$s synchronisées</string>
     <string name="toast_cancel_create_user">Inscription annulée</string>
@@ -51,9 +87,13 @@
     <string name="toast_infirm_fetch_user_exception">Synchronisation des données de %1$s impossible (%2$s)</string>
     <string name="toast_infirm_fetch_user_default">Synchronisation des données de %1$s impossible</string>
 
-    <string name="toast_infirm_create_default">Création impossible !</string>
-    <string name="toast_infirm_response_null">Réponse «null» …</string>
-    <string name="toast_infirm_create_building_message">Construction impossible (%1$s)</string>
+    <!-- API : Building -->
+
+    <string name="toast_confirm_create_building">Construction lancée !</string>
+    <string name="toast_confirm_fetch_buildings">Données des bâtiments synchronisées</string>
+    <string name="toast_infirm_create_building_apimessage">Construction impossible (%1$s)</string>
+    <string name="toast_infirm_create_building_exception">Construction impossible (%1$s)</string>
+    <string name="toast_infirm_create_building_default">Les données des bâtiments n\'ont pu être récupérées</string>
     <string name="toast_infirm_create_building_not_found">Ce bâtiment n\'existe pas</string>
     <string name="toast_infirm_create_building_invalid_request">Requête invalide</string>
     <string name="toast_infirm_create_building_in_queue">Ce bâtiment est déjà en cours d\'amélioration</string>
@@ -61,7 +101,13 @@
     <string name="toast_infirm_create_building_invalid_token">Authentification du joueur impossible</string>
     <string name="toast_infirm_create_building_bad_response">Le serveur n\'a pas pu traîter la requête</string>
     <string name="toast_infirm_create_building_internal_error">Une erreur serveur est survenue</string>
+    <string name="toast_infirm_fetch_buildings_exception">Les données des bâtiments n\'ont pu être récupérées (%1$s)</string>
+    <string name="toast_infirm_fetch_buildings_apimessage">Les données des bâtiments n\'ont pu être récupérées (%1$s)</string>
+    <string name="toast_infirm_fetch_buildings_default">Les données des bâtiments n\'ont pu être récupérées</string>
 
+    <!-- API : Ship -->
+
+    <string name="toast_infirm_fetch_ships">Les données des vaisseaux n\'ont pu être récupérées</string>
     <string name="toast_infirm_create_ship_message">Construction impossible (%1$s)</string>
     <string name="toast_infirm_create_ship_not_found">Ce vaisseau n\'existe pas</string>
     <string name="toast_infirm_create_ship_invalid_request">Requête invalide</string>
@@ -71,8 +117,7 @@
     <string name="toast_infirm_create_ship_bad_response">Le serveur n\'a pas pu traîter la requête</string>
     <string name="toast_infirm_create_ship_internal_error">Une erreur serveur est survenue</string>
 
-    <string name="toast_infirm_fetch_buildings">Les données des bâtiments n\'ont pu être récupérées</string>
-    <string name="toast_infirm_fetch_ships">Les données des vaisseaux n\'ont pu être récupérées</string>
+    <!-- API : Search -->
 
     <string name="userstats_username_textview">Username</string>
     <string name="userstats_score_textview">Total score : %1$d pts</string>
@@ -81,8 +126,8 @@
     <string name="userstats_gas_multiplier_textview">(multiplier : %1$d)</string>
     <string name="userstats_mineral_amount_textview">Mineral : %1$d</string>
     <string name="userstats_mineral_multiplier_textview">(multiplier : %1$d)</string>
-
-    <string name="menu_main_refresh">Refresh</string>
+    <string name="main_minerals_imageview">minerals</string>
+    <string name="main_gas_imageview">gas</string>
 
 
 </resources>

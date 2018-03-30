@@ -6,4 +6,7 @@
     <dimen name="userstats_resources_margin_top">32dp</dimen>
     <dimen name="global_text_paragraph_interline">12dp</dimen>
     <dimen name="login_edittext_width">350dp</dimen>
+    <dimen name="minerals_imageview_side">50dp</dimen>
+    <dimen name="gas_imageview_side">50dp</dimen>
+    <dimen name="main_resources_marginTop">16dp</dimen>
 </resources>

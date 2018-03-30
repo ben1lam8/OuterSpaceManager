@@ -11,6 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -19,6 +23,7 @@ import butterknife.OnClick;
 import dagger.android.AndroidInjection;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
+import lamit.outerspacemanager.com.outerspacemanager.event.RepositoryMessageEvent;
 import lamit.outerspacemanager.com.outerspacemanager.model.Credentials;
 import lamit.outerspacemanager.com.outerspacemanager.R;
 import lamit.outerspacemanager.com.outerspacemanager.viewmodel.LoginViewModel;
@@ -68,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements HasActivityInjec
         Timber.d("ViewModel ready");
 
         // Now listen...
-        Timber.d("Listening to data mutations and UI events...");
+        Timber.d("Listening to data mutations...");
     }
 
     private void configureDagger(){
@@ -136,5 +141,24 @@ public class LoginActivity extends AppCompatActivity implements HasActivityInjec
                 this.vm.connectUser(credentials);
             }
         }
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        EventBus.getDefault().register(this);
+        Timber.d("Listening to UI events...");
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+        Timber.d("Stop listening to UI events...");
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onRepositoryMessageEvent(RepositoryMessageEvent event) {
+        Toast.makeText(this, event.getMessage(), event.getLength()).show();
     }
 }

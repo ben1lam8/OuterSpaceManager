@@ -5,4 +5,8 @@
         android:id="@+id/menu_main_refresh"
         android:title="@string/menu_main_refresh"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_main_disconnect"
+        android:title="@string/menu_main_disconnect"
+        app:showAsAction="never" />
 </menu>
