@@ -52,6 +52,7 @@ public class MainFragment extends Fragment {
         // Inflate layout and bind views
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         Timber.d("Layout Inflated");
+
         ButterKnife.bind(this, view);
         Timber.d("Views binded");
 
@@ -70,8 +71,8 @@ public class MainFragment extends Fragment {
         this.configureViewModel();
         Timber.d("ViewModel ready");
 
-        // Now listen...
-        Timber.d("Listening to data mutations and UI events...");
+        // Now observe...
+        Timber.d("Observing data mutations...");
     }
 
     private void configureDagger(){
@@ -85,13 +86,11 @@ public class MainFragment extends Fragment {
 
         vm.getUser().observe(
                 this,
-                this::updateUI
+                user -> { if(user != null) updateUI(user); }
         );
     }
 
     private void updateUI(User user){
-
-        if (user == null) return;
 
         Timber.d("Update UI");
         this.usernameTextView.setText(getString(R.string.main_username_textview, user.getUsername()));

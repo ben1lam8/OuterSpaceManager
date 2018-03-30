@@ -129,7 +129,6 @@ public class UserRepository {
                 @Override
                 public void onFailure(Call<Token> call, Throwable t) {
                     Timber.d(t, "An error occurred while trying to create a new user");
-                    Toast.makeText(appContext, appContext.getString(R.string.toast_infirm_create_user_default), Toast.LENGTH_LONG).show();
                     EventBus
                             .getDefault()
                             .post(new RepositoryMessageEvent(

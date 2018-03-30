@@ -43,10 +43,10 @@
     <!-- ACTIVITY/FRAGMENT/ITEM : Buildings -->
 
     <string name="building_item_level">Lvl %1$d</string>
-    <string name="building_item_gas">Gas : %1$d</string>
-    <string name="building_item_mineral">Mineral : %1$d</string>
+    <string name="building_item_gas">%1$d</string>
+    <string name="building_item_mineral">%1$d</string>
     <string name="building_item_effect">%1$s : +%2$d</string>
-    <string name="building_item_time">UPGRADE (%1$d sec)</string>
+    <string name="building_item_upgrade_total_time">UPGRADE (%1$d sec)</string>
 
     <!-- ACTIVITY/FRAGMENT/ITEM : Searches -->
 
@@ -128,6 +128,6 @@
     <string name="userstats_mineral_multiplier_textview">(multiplier : %1$d)</string>
     <string name="main_minerals_imageview">minerals</string>
     <string name="main_gas_imageview">gas</string>
-
+    <string name="building_item_upgrade_remaining_time">UPGRADING (%1$d s. remaining)</string>
 
 </resources>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="4dp"
     android:paddingBottom="4dp"
@@ -8,39 +10,37 @@
     android:paddingRight="4dp">
 
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="3"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
             android:id="@+id/building_item_icon_imageview"
             android:src="@drawable/default_factory"/>
 
-        <TextView
-            android:id="@+id/building_item_level_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:textSize="20dp"
-            android:text="Level"
-            />
+        <ProgressBar
+            android:id="@+id/building_item_upgrade_progressbar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/building_item_time_textview"
+            android:id="@+id/building_item_upgrade_textview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="10dp"
-            android:text="UPGRADE (xxx s)"
-            />
+            android:textSize="18sp"
+            tools:text="UPGRADE (xxx s)"/>
     </LinearLayout>
 
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="5"
         android:layout_marginStart="@dimen/building_list_item_text_margin_start"
         android:layout_marginLeft="@dimen/building_list_item_text_margin_start"
         android:orientation="vertical">
@@ -53,7 +53,16 @@
             android:gravity="center_vertical"
             android:textSize="24dp"
             android:textAllCaps="true"
-            android:text="Name"
+            tools:text="Name"
+            />
+
+        <TextView
+            android:id="@+id/building_item_level_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            tools:text="Level"
             />
 
         <TextView
@@ -71,7 +80,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:textSize="16dp"
-            android:text="effect : +xxx"
+            tools:text="effect : +xxx"
             />
 
 
@@ -84,25 +93,51 @@
             android:text="Price for next level"
             />
 
-        <TextView
-            android:id="@+id/building_item_gas_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textSize="16dp"
-            android:text="Gas : xxx"
-            />
-
-        <TextView
-            android:id="@+id/building_item_mineral_textview"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="16dp"
-            android:text="Mineral : xxx"
-            />
+            android:layout_height="wrap_content"
+            android:stretchColumns="0,1">
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
 
+                <ImageView
+                    android:layout_width="@dimen/minerals_imageview_side"
+                    android:layout_height="@dimen/minerals_imageview_side"
+                    android:contentDescription="@string/main_minerals_imageview"
+                    android:src="@drawable/minerals" />
 
+                <ImageView
+                    android:layout_width="@dimen/gas_imageview_side"
+                    android:layout_height="@dimen/gas_imageview_side"
+                    android:contentDescription="@string/main_gas_imageview"
+                    android:src="@drawable/gas" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/building_item_minerals_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    tools:text="xxxxx"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/building_item_gas_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    tools:text="xxxxx"
+                    android:textSize="16sp" />
+            </TableRow>
+        </TableLayout>
 
     </LinearLayout>
 

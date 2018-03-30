@@ -6,15 +6,10 @@
     android:orientation="vertical"
     tools:context="lamit.outerspacemanager.com.outerspacemanager.ui.activity.BuildingsActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="BUILDINGS"/>
-
     <ListView
         android:id="@+id/buildings_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
     </ListView>
 

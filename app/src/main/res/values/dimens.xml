@@ -9,4 +9,5 @@
     <dimen name="minerals_imageview_side">50dp</dimen>
     <dimen name="gas_imageview_side">50dp</dimen>
     <dimen name="main_resources_marginTop">16dp</dimen>
+    <dimen name="building_list_item_text_size">16sp</dimen>
 </resources>

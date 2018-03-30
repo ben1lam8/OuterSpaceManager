@@ -32,16 +32,29 @@ public class BuildingsViewModel extends ViewModel {
             this.user = this.userRepo.getLastConnectedFreshUser();
         }
 
-        if (this.buildings == null && user.getValue() != null) {
-            this.buildings = this.buildingRepo.getBuildings(user.getValue().getToken());
+        if (this.buildings == null) {
+            this.buildings = this.buildingRepo.getBuildings();
         }
     }
 
     public LiveData<User> getUser() { return this.user; }
 
-    public LiveData<List<Building>> getBuildings() { return this.buildings; }
+    public LiveData<List<Building>> getBuildings() {
+        this.refreshBuildings();
+        return this.buildings;
+    }
 
-    public void refreshBuildings(String token){
-        this.buildingRepo.refreshBuildings(token);
+    public void refreshBuildings(){
+        if(this.user.getValue() != null) {
+            this.buildingRepo.refreshBuildings(this.user.getValue().getToken());
+        }
+    }
+
+    public void createBuilding(int index){
+
+        if (this.buildings.getValue() == null || this.getUser().getValue() == null) return;
+
+        Building building = this.buildings.getValue().get(index);
+        this.buildingRepo.createBuilding(building, this.getUser().getValue().getToken());
     }
 }

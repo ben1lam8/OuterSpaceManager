@@ -10,15 +10,24 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 import dagger.android.support.AndroidSupportInjection;
 import lamit.outerspacemanager.com.outerspacemanager.R;
+import lamit.outerspacemanager.com.outerspacemanager.model.Building;
 import lamit.outerspacemanager.com.outerspacemanager.model.User;
+import lamit.outerspacemanager.com.outerspacemanager.ui.adapter.BuildingsListItemAdapter;
 import lamit.outerspacemanager.com.outerspacemanager.viewmodel.BuildingsViewModel;
 import lamit.outerspacemanager.com.outerspacemanager.viewmodel.MainViewModel;
 import timber.log.Timber;
@@ -32,6 +41,10 @@ public class BuildingsFragment extends Fragment {
     ViewModelProvider.Factory viewModelFactory;
     private BuildingsViewModel vm;
 
+    @BindView(R.id.buildings_listview) ListView buildingsListView;
+
+    BuildingsListItemAdapter buildingsListItemAdapter;
+
     public BuildingsFragment() {
         // Required empty public constructor
     }
@@ -42,7 +55,10 @@ public class BuildingsFragment extends Fragment {
         // Inflate layout and bind views
         View view = inflater.inflate(R.layout.fragment_buildings, container, false);
         Timber.d("Layout Inflated");
+
         ButterKnife.bind(this, view);
+        this.buildingsListItemAdapter = new BuildingsListItemAdapter(getContext());
+        buildingsListView.setAdapter(this.buildingsListItemAdapter);
         Timber.d("Views binded");
 
         return view;
@@ -60,8 +76,8 @@ public class BuildingsFragment extends Fragment {
         this.configureViewModel();
         Timber.d("ViewModel ready");
 
-        // Now listen...
-        Timber.d("Listening to data mutations and UI events...");
+        // Now observe...
+        Timber.d("Observing data mutations...");
     }
 
     private void configureDagger(){
@@ -69,17 +85,33 @@ public class BuildingsFragment extends Fragment {
     }
 
     private void configureViewModel(){
-        //String userLogin = getArguments().getString(UID_KEY);
         this.vm = ViewModelProviders.of(this, viewModelFactory).get(BuildingsViewModel.class);
         this.vm.init();
 
         this.vm.getUser().observe(
                 this,
-                this::updateUI
+                user -> { if (user != null) refresh();}
+        );
+
+        this.vm.getBuildings().observe(
+                this,
+                buildings -> { if (buildings != null && buildings.size() > 0) updateUI(buildings); }
         );
     }
 
-    private void updateUI(User user){
-        //
+    private void updateUI(List<Building> buildings){
+        this.buildingsListItemAdapter.setObjects(buildings);
+        Timber.d("Updated listview objects");
+    }
+
+    private void refresh(){
+        //refreshUser ?
+        this.vm.refreshBuildings();
+        Timber.d("Refreshing binded data...");
+    }
+
+    @OnItemClick(R.id.buildings_listview)
+    public void onItemClick(int position){
+        this.vm.createBuilding(position);
     }
 }

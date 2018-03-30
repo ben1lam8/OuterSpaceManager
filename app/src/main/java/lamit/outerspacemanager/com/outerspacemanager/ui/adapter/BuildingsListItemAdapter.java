@@ -6,74 +6,109 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.bumptech.glide.Glide;
 
+import java.time.Duration;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import lamit.outerspacemanager.com.outerspacemanager.model.Building;
-import lamit.outerspacemanager.com.outerspacemanager.ui.activity.BuildingsActivity;
 import lamit.outerspacemanager.com.outerspacemanager.R;
+import timber.log.Timber;
 //import lamit.outerspacemanager.com.outerspacemanager.services.DownloadImageTask;
 
 public class BuildingsListItemAdapter extends ArrayAdapter<Building>{
 
-    private final Context context;
-    private ArrayList<Building> buildingsList;
+    public BuildingsListItemAdapter(Context context){
+        super(context, 0);
+    }
 
-    public BuildingsListItemAdapter(BuildingsActivity buildingsActivity, ArrayList<Building> buildingsList) {
-        super(buildingsActivity, -1, buildingsList);
-        this.context = buildingsActivity;
-        this.buildingsList = buildingsList;
+    public void setObjects(List<Building> buildingsList){
+        this.clear();
+        this.addAll(buildingsList);
+    }
+
+    static class ViewHolder {
+        @BindView(R.id.building_item_icon_imageview)        ImageView iconImageView;
+        @BindView(R.id.building_item_level_textview)        TextView levelTextView;
+        @BindView(R.id.building_item_upgrade_progressbar)   ProgressBar upgradeProgressBar;
+        @BindView(R.id.building_item_upgrade_textview)      TextView upgradeTextView;
+        @BindView(R.id.building_item_name_textview)         TextView nameTextView;
+        @BindView(R.id.building_item_effect_textview)       TextView effectTextView;
+        @BindView(R.id.building_item_gas_textview)          TextView gasTextView;
+        @BindView(R.id.building_item_minerals_textview)      TextView mineralTextView;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        //TODO: use ViewHolder
+        ViewHolder holder;
+        if (convertView != null) {
+            holder = (ViewHolder) convertView.getTag();
+        } else {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_building, parent, false);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
+        }
 
-        // Élément courant
-        Building currentBuilding = buildingsList.get(position);
+        Building currentBuilding = getItem(position);
+
         int nextLevel = currentBuilding.getLevel()+1;
 
-        // Inflation du layout de la ligne
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        holder.nameTextView.setText(currentBuilding.getName());
 
-        View rowView = inflater.inflate(R.layout.list_item_building, parent, false);
+        String levelText = getContext().getString(R.string.building_item_level, currentBuilding.getLevel());
+        holder.levelTextView.setText(levelText);
 
-        // Récupération des widgets
-        ImageView iconImageView = (ImageView) rowView.findViewById(R.id.building_item_icon_imageview);
-        TextView levelTextView = (TextView) rowView.findViewById(R.id.building_item_level_textview);
-        TextView timeTextView = (TextView) rowView.findViewById(R.id.building_item_time_textview);
+        if(currentBuilding.getConstructionFinish() != null && currentBuilding.getConstructionFinish().after(new Date())){
 
-        TextView nameTextView = (TextView) rowView.findViewById(R.id.building_item_name_textview);
-        TextView effectTextView = (TextView) rowView.findViewById(R.id.building_item_effect_textview);
-        TextView gasTextView = (TextView) rowView.findViewById(R.id.building_item_gas_textview);
-        TextView mineralTextView = (TextView) rowView.findViewById(R.id.building_item_mineral_textview);
+            long totalTime = TimeUnit.MILLISECONDS.toSeconds(currentBuilding.getConstructionFinish().getTime() - currentBuilding.getConstructionStart().getTime());
+            long remainingTime = TimeUnit.MILLISECONDS.toSeconds(currentBuilding.getConstructionFinish().getTime() - new Date().getTime());
+            long elapsedTime = totalTime - remainingTime;
 
-        // Initialisation des widgets
-        //new DownloadImageTask(iconImageView).execute(currentBuilding.getImageUrl());
+            int progress = (int) (elapsedTime*100/totalTime);
 
-        nameTextView.setText(currentBuilding.getName());
+            holder.upgradeProgressBar.setProgress(progress);
+            holder.upgradeProgressBar.setVisibility(View.VISIBLE);
 
-        String levelText = context.getResources().getString(R.string.building_item_level, currentBuilding.getLevel());
-        levelTextView.setText(levelText);
+            String timeText = getContext().getString(R.string.building_item_upgrade_remaining_time, remainingTime);
+            holder.upgradeTextView.setText(timeText);
+        }else{
 
-        int nextLevelTime = currentBuilding.getTimeToBuildByLevel()*nextLevel+currentBuilding.getTimeToBuildLevel0();
-        String timeText = context.getResources().getString(R.string.building_item_time, nextLevelTime);
-        timeTextView.setText(timeText);
+            holder.upgradeProgressBar.setVisibility(View.INVISIBLE);
+
+            int nextLevelTime = currentBuilding.getTimeToBuildByLevel()*nextLevel+currentBuilding.getTimeToBuildLevel0();
+            String timeText = getContext().getString(R.string.building_item_upgrade_total_time, nextLevelTime);
+            holder.upgradeTextView.setText(timeText);
+        }
 
         int nextLevelEffect = currentBuilding.getAmountOfEffectByLevel()*nextLevel+currentBuilding.getAmountOfEffectLevel0();
-        String effectText = context.getResources().getString(R.string.building_item_effect, currentBuilding.getEffect(), nextLevelEffect);
-        effectTextView.setText(effectText);
+        String effectText = getContext().getString(R.string.building_item_effect, currentBuilding.getEffect(), nextLevelEffect);
+        holder.effectTextView.setText(effectText);
 
         int nextLevelGasCost = currentBuilding.getGasCostByLevel()*nextLevel+currentBuilding.getGasCostLevel0();
-        String gasText = context.getResources().getString(R.string.building_item_gas, nextLevelGasCost);
-        gasTextView.setText(gasText);
+        String gasText = getContext().getString(R.string.building_item_gas, nextLevelGasCost);
+        holder.gasTextView.setText(gasText);
 
         int nextLevelMineralCost = currentBuilding.getMineralCostByLevel()*nextLevel+currentBuilding.getMineralCostLevel0();
-        String mineralText = context.getResources().getString(R.string.building_item_mineral, nextLevelMineralCost);
-        mineralTextView.setText(mineralText);
+        String mineralText = getContext().getString(R.string.building_item_mineral, nextLevelMineralCost);
+        holder.mineralTextView.setText(mineralText);
 
-        return rowView;
+        Glide
+            .with(getContext())
+            .load(currentBuilding.getImageUrl())
+            .into(holder.iconImageView);
+
+        return convertView;
     }
 }

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         tools:text="@string/main_username_textview"
         android:gravity="center"
-        android:textSize="32sp"/>
+        android:textSize="48sp"/>
 
     <TextView
         android:id="@+id/main_score_textview"

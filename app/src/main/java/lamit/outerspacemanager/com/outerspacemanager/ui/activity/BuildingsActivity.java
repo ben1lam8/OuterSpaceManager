@@ -19,7 +19,7 @@ import lamit.outerspacemanager.com.outerspacemanager.ui.fragment.BuildingsFragme
 import lamit.outerspacemanager.com.outerspacemanager.viewmodel.BuildingsViewModel;
 import timber.log.Timber;
 
-public class BuildingsActivity extends AppCompatActivity implements HasSupportFragmentInjector, AdapterView.OnItemClickListener{
+public class BuildingsActivity extends AppCompatActivity implements HasSupportFragmentInjector {
 
     @Inject
     DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
@@ -75,17 +75,5 @@ public class BuildingsActivity extends AppCompatActivity implements HasSupportFr
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.buildings_container, buildingsFragment, null)
                 .commit();
-    }
-
-
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-        /*Building building = this.buildings.get(i);
-        Log.i(TAG, "Click sur «Construction» pour le bâtiment suivant : "+ building.toString());
-
-        //this.createBuilding(building.getBuildingId(), this.token.getToken());*/
-
     }
 }
