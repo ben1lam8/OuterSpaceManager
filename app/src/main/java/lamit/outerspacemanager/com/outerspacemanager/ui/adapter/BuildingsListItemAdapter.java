@@ -14,11 +14,12 @@ import com.bumptech.glide.Glide;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lamit.outerspacemanager.com.outerspacemanager.di.module.GlideApp;
 import lamit.outerspacemanager.com.outerspacemanager.model.Building;
 import lamit.outerspacemanager.com.outerspacemanager.R;
+import timber.log.Timber;
 
 public class BuildingsListItemAdapter extends ArrayAdapter<Building>{
 
@@ -39,7 +40,7 @@ public class BuildingsListItemAdapter extends ArrayAdapter<Building>{
         @BindView(R.id.building_item_name_textview)         TextView nameTextView;
         @BindView(R.id.building_item_effect_textview)       TextView effectTextView;
         @BindView(R.id.building_item_gas_textview)          TextView gasTextView;
-        @BindView(R.id.building_item_minerals_textview)      TextView mineralTextView;
+        @BindView(R.id.building_item_minerals_textview)     TextView mineralTextView;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);
@@ -101,9 +102,11 @@ public class BuildingsListItemAdapter extends ArrayAdapter<Building>{
         String mineralText = getContext().getString(R.string.building_item_mineral, nextLevelMineralCost);
         holder.mineralTextView.setText(mineralText);
 
-        Glide
+        GlideApp
             .with(getContext())
             .load(currentBuilding.getImageUrl())
+            .fitCenter()
+            .placeholder(R.drawable.building_default)
             .into(holder.iconImageView);
 
         return convertView;

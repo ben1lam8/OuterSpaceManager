@@ -18,7 +18,7 @@ public class SearchesList {
         return this;
     }
 
-    public ArrayList<Search> getSearchs() {
+    public ArrayList<Search> getSearches() {
         return searches;
     }
 

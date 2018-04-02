@@ -39,6 +39,8 @@
     <string name="main_show_galaxy_button">Galaxie</string>
     <string name="main_username_textview">%1$s</string>
     <string name="main_score_textview">%1$d pts</string>
+    <string name="main_minerals_imageview">minerals</string>
+    <string name="main_gas_imageview">gas</string>
 
     <!-- ACTIVITY/FRAGMENT/ITEM : Buildings -->
 
@@ -47,10 +49,16 @@
     <string name="building_item_mineral">%1$d</string>
     <string name="building_item_effect">%1$s : +%2$d</string>
     <string name="building_item_upgrade_total_time">UPGRADE (%1$d sec)</string>
+    <string name="building_item_upgrade_remaining_time">EN AMÉLIORATION (reste %1$d s.)</string>
 
     <!-- ACTIVITY/FRAGMENT/ITEM : Searches -->
 
-
+    <string name="search_item_level">Lvl %1$d</string>
+    <string name="search_item_gas">%1$d</string>
+    <string name="search_item_mineral">%1$d</string>
+    <string name="search_item_effect">%1$s : +%2$d</string>
+    <string name="search_item_upgrade_total_time">UPGRADE (%1$d sec)</string>
+    <string name="search_item_upgrade_remaining_time">EN AMÉLIORATION (reste %1$d s.)</string>
 
     <!-- ACTIVITY/FRAGMENT/ITEM : Shipyard -->
 
@@ -61,6 +69,10 @@
     <string name="ship_item_gas">Gas : %1$d</string>
     <string name="ship_item_minerals">Mineral : %1$d</string>
     <string name="ship_item_spatioport">Spatioport level needed : %1$d</string>
+    <string name="ship_item_create">CONSTRUIRE (%1$d sec)</string>
+    <string name="ship_item_stats_textview">Stats</string>
+    <string name="ship_item_price_textview">Prix</string>
+    <string name="ship_item_amount">x%1$d (%2$d à venir)</string>
 
     <!-- ACTIVITY/FRAGMENT/ITEM : Galaxy -->
 
@@ -119,19 +131,21 @@
 
     <!-- API : Search -->
 
-    <string name="userstats_username_textview">Username</string>
-    <string name="userstats_score_textview">Total score : %1$d pts</string>
-    <string name="userstats_gas_textview">Available resources</string>
-    <string name="userstats_gas_amount_textview">Gas : %1$d</string>
-    <string name="userstats_gas_multiplier_textview">(multiplier : %1$d)</string>
-    <string name="userstats_mineral_amount_textview">Mineral : %1$d</string>
-    <string name="userstats_mineral_multiplier_textview">(multiplier : %1$d)</string>
-    <string name="main_minerals_imageview">minerals</string>
-    <string name="main_gas_imageview">gas</string>
-    <string name="building_item_upgrade_remaining_time">EN AMÉLIORATION (reste %1$d s.)</string>
-    <string name="ship_item_create">CONSTRUIRE (%1$d sec)</string>
-    <string name="ship_item_stats_textview">Stats</string>
-    <string name="ship_item_price_textview">Prix</string>
-    <string name="ship_item_amount">x%1$d (%2$d à venir)</string>
+    <string name="toast_confirm_upgrade_search">Amélioration lancée !</string>
+    <string name="toast_confirm_fetch_searches">Données des recherches synchronisées</string>
+    <string name="toast_infirm_upgrade_search_apimessage">Amélioration impossible (%1$s)</string>
+    <string name="toast_infirm_upgrade_search_exception">Amélioration impossible (%1$s)</string>
+    <string name="toast_infirm_upgrade_search_default">Les données des recherches n\'ont pu être récupérées</string>
+    <string name="toast_infirm_upgrade_search_not_found">Ce bâtiment n\'existe pas</string>
+    <string name="toast_infirm_upgrade_search_invalid_request">Requête invalide</string>
+    <string name="toast_infirm_upgrade_search_in_queue">Ce bâtiment est déjà en cours d\'amélioration</string>
+    <string name="toast_infirm_upgrade_search_not_enough_resources">Pas assez de ressources</string>
+    <string name="toast_infirm_upgrade_search_invalid_token">Authentification du joueur impossible</string>
+    <string name="toast_infirm_upgrade_search_bad_response">Le serveur n\'a pas pu traîter la requête</string>
+    <string name="toast_infirm_upgrade_search_internal_error">Une erreur serveur est survenue</string>
+    <string name="toast_infirm_fetch_searches_exception">Les données des recherches n\'ont pu être récupérées (%1$s)</string>
+    <string name="toast_infirm_fetch_searches_apimessage">Les données des recherches n\'ont pu être récupérées (%1$s)</string>
+    <string name="toast_infirm_fetch_searches_default">Les données des recherches n\'ont pu être récupérées</string>
+    <string name="building_item_icon_imageview_description">building icon</string>
 
 </resources>

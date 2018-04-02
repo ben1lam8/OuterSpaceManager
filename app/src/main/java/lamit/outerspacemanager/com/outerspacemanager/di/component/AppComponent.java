@@ -12,6 +12,8 @@ import lamit.outerspacemanager.com.outerspacemanager.OuterSpaceManager;
 import lamit.outerspacemanager.com.outerspacemanager.di.builder.ActivityBuilder;
 import lamit.outerspacemanager.com.outerspacemanager.di.module.AppModule;
 import lamit.outerspacemanager.com.outerspacemanager.di.builder.FragmentBuilder;
+import lamit.outerspacemanager.com.outerspacemanager.di.module.GlideApp;
+import lamit.outerspacemanager.com.outerspacemanager.di.module.GlideAppModule;
 
 @Singleton
 @Component(modules={AndroidInjectionModule.class, AppModule.class, ActivityBuilder.class, FragmentBuilder.class})

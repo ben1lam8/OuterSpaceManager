@@ -49,11 +49,11 @@ public class Search {
     @Expose
     private int timeToBuildLevel0;
 
-    private Date constructionStart;
+    private Date upgradeStart;
 
-    private Date constructionFinish;
+    private Date upgradeFinish;
 
-    public Search(@NonNull int searchId, String name, int level, boolean building, String effect, int amountOfEffectByLevel, int amountOfEffectLevel0, int gasCostByLevel, int gasCostLevel0, int mineralCostByLevel, int mineralCostLevel0, int timeToBuildByLevel, int timeToBuildLevel0, Date constructionStart, Date constructionFinish) {
+    public Search(@NonNull int searchId, String name, int level, boolean building, String effect, int amountOfEffectByLevel, int amountOfEffectLevel0, int gasCostByLevel, int gasCostLevel0, int mineralCostByLevel, int mineralCostLevel0, int timeToBuildByLevel, int timeToBuildLevel0, Date upgradeStart, Date upgradeFinish) {
         this.searchId = searchId;
         this.name = name;
         this.level = level;
@@ -67,8 +67,8 @@ public class Search {
         this.mineralCostLevel0 = mineralCostLevel0;
         this.timeToBuildByLevel = timeToBuildByLevel;
         this.timeToBuildLevel0 = timeToBuildLevel0;
-        this.constructionStart = constructionStart;
-        this.constructionFinish = constructionFinish;
+        this.upgradeStart = upgradeStart;
+        this.upgradeFinish = upgradeFinish;
     }
 
     @NonNull
@@ -189,21 +189,21 @@ public class Search {
         return this;
     }
 
-    public Date getConstructionStart() {
-        return constructionStart;
+    public Date getUpgradeStart() {
+        return upgradeStart;
     }
 
-    public Search setConstructionStart(Date constructionStart) {
-        this.constructionStart = constructionStart;
+    public Search setUpgradeStart(Date upgradeStart) {
+        this.upgradeStart = upgradeStart;
         return this;
     }
 
-    public Date getConstructionFinish() {
-        return constructionFinish;
+    public Date getUpgradeFinish() {
+        return upgradeFinish;
     }
 
-    public Search setConstructionFinish(Date constructionFinish) {
-        this.constructionFinish = constructionFinish;
+    public Search setUpgradeFinish(Date upgradeFinish) {
+        this.upgradeFinish = upgradeFinish;
         return this;
     }
 

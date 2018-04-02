@@ -10,25 +10,36 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 import dagger.android.support.AndroidSupportInjection;
 import lamit.outerspacemanager.com.outerspacemanager.R;
+import lamit.outerspacemanager.com.outerspacemanager.model.Building;
+import lamit.outerspacemanager.com.outerspacemanager.model.Search;
 import lamit.outerspacemanager.com.outerspacemanager.model.User;
+import lamit.outerspacemanager.com.outerspacemanager.ui.adapter.BuildingsListItemAdapter;
+import lamit.outerspacemanager.com.outerspacemanager.ui.adapter.SearchesListItemAdapter;
+import lamit.outerspacemanager.com.outerspacemanager.viewmodel.BuildingsViewModel;
 import lamit.outerspacemanager.com.outerspacemanager.viewmodel.GalaxyViewModel;
 import lamit.outerspacemanager.com.outerspacemanager.viewmodel.SearchesViewModel;
 import timber.log.Timber;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class SearchesFragment extends Fragment {
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
     private SearchesViewModel vm;
+
+    @BindView(R.id.searches_listview) ListView searchesListView;
+
+    SearchesListItemAdapter searchesListItemAdapter;
 
     public SearchesFragment() {
         // Required empty public constructor
@@ -40,7 +51,10 @@ public class SearchesFragment extends Fragment {
         // Inflate layout and bind views
         View view = inflater.inflate(R.layout.fragment_searches, container, false);
         Timber.d("Layout Inflated");
+
         ButterKnife.bind(this, view);
+        this.searchesListItemAdapter = new SearchesListItemAdapter(getContext());
+        searchesListView.setAdapter(this.searchesListItemAdapter);
         Timber.d("Views binded");
 
         return view;
@@ -59,7 +73,7 @@ public class SearchesFragment extends Fragment {
         Timber.d("ViewModel ready");
 
         // Now listen...
-        Timber.d("Listening to data mutations and UI events...");
+        Timber.d("Listening to data mutations...");
     }
 
     private void configureDagger(){
@@ -72,12 +86,27 @@ public class SearchesFragment extends Fragment {
 
         this.vm.getUser().observe(
                 this,
-                this::updateUI
+                user -> { if (user != null) refresh();}
+        );
+
+        this.vm.getSearches().observe(
+                this,
+                searches -> { if (searches != null && searches.size() > 0) updateUI(searches); }
         );
     }
 
-    private void updateUI(User user){
-        //
+    private void updateUI(List<Search> searches){
+        this.searchesListItemAdapter.setObjects(searches);
+        Timber.d("Updated listview objects");
     }
+
+    private void refresh(){
+        //refreshUser ?
+        this.vm.refreshSearches();
+        Timber.d("Refreshing binded data...");
+    }
+
+    @OnItemClick(R.id.searches_listview)
+    public void onItemClick(int position){ this.vm.upgradeSearch(position); }
 
 }

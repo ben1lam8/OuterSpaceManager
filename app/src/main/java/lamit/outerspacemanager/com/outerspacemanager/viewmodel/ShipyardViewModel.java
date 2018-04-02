@@ -59,5 +59,4 @@ public class ShipyardViewModel extends ViewModel {
         Ship ship = this.ships.getValue().get(index);
         this.shipRepo.createShip(ship, 1, this.getUser().getValue().getToken());
     }
-
 }
