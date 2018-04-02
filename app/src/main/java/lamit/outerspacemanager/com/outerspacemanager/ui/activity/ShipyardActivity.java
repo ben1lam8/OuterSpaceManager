@@ -24,7 +24,7 @@ import lamit.outerspacemanager.com.outerspacemanager.ui.fragment.ShipyardFragmen
 import lamit.outerspacemanager.com.outerspacemanager.viewmodel.ShipyardViewModel;
 import timber.log.Timber;
 
-public class ShipyardActivity extends AppCompatActivity implements HasSupportFragmentInjector, AdapterView.OnItemClickListener{
+public class ShipyardActivity extends AppCompatActivity implements HasSupportFragmentInjector {
 
     @Inject
     DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
@@ -60,7 +60,7 @@ public class ShipyardActivity extends AppCompatActivity implements HasSupportFra
         Timber.d("Views binded");
 
         // Now listen...
-        Timber.d("Listening to data mutations and UI events...");
+        Timber.d("Listening to data mutations...");
     }
 
     private void configureDagger(){ AndroidInjection.inject(this); }
@@ -82,14 +82,4 @@ public class ShipyardActivity extends AppCompatActivity implements HasSupportFra
                 .commit();
     }
 
-
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-        /*Ship ship = this.ships.get(i);
-        Log.i(TAG, "Click sur «Construction» pour le vaisseau suivant : "+ ship.toString());
-
-        //this.createShip(ship.getShipId(), this.token.getToken());*/
-    }
 }

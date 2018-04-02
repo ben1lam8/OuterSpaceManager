@@ -4,8 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
 
+import java.util.Date;
 import java.util.List;
 import lamit.outerspacemanager.com.outerspacemanager.model.Building;
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
@@ -21,10 +21,10 @@ public interface BuildingDao {
     LiveData<List<Building>> loadAll();
 
     @Insert(onConflict = REPLACE)
-    void save(Building building);
+    void insert(Building building);
 
     @Query("UPDATE building SET name = :name, imageUrl = :imageUrl, level = :level, building = :building, effect = :effect, amountOfEffectByLevel = :amountOfEffectByLevel, amountOfEffectLevel0 = :amountOfEffectLevel0, gasCostByLevel = :gasCostByLevel, gasCostLevel0 = :gasCostLevel0, mineralCostByLevel = :mineralCostByLevel, mineralCostLevel0 = :mineralCostLevel0, timeToBuildByLevel = :timeToBuildByLevel, timeToBuildLevel0 = :timeToBuildLevel0 WHERE buildingId= :id")
-    void update(
+    int update(
             int id,
             String name,
             String imageUrl,
@@ -39,5 +39,12 @@ public interface BuildingDao {
             int mineralCostLevel0,
             int timeToBuildByLevel,
             int timeToBuildLevel0
+    );
+
+    @Query("UPDATE building SET upgradeStart = :constructionStart, upgradeFinish = :constructionFinish WHERE buildingId = :id")
+    int updateUpgrade(
+            int id,
+            Date constructionStart,
+            Date constructionFinish
     );
 }

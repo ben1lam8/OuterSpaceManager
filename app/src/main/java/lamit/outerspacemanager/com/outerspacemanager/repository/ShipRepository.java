@@ -7,8 +7,6 @@ import android.content.Context;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -40,9 +38,31 @@ public class ShipRepository {
         this.executor = executor;
     }
 
-    public LiveData<List<Ship>> getShips(String token){
-        refreshShips(token);
-        return shipDao.loadAll();
+    public LiveData<List<Ship>> getShips(){
+        return this.shipDao.loadAll();
+    }
+
+    private void save(Ship ship){
+
+        int updatedRowsCount = this.shipDao.update(
+                ship.getShipId(),
+                ship.getName(),
+                ship.getLife(),
+                ship.getShield(),
+                ship.getMinAttack(),
+                ship.getMaxAttack(),
+                ship.getSpeed(),
+                ship.getMineralCost(),
+                ship.getGasCost(),
+                ship.getSpatioportLevelNeeded(),
+                ship.getTimeToBuild()
+        );
+
+        if(updatedRowsCount == 0){
+            this.shipDao.insert(ship);
+
+            Timber.d("New ship %s inserted", ship);
+        }
     }
 
     public void refreshShips(String token) {
@@ -62,14 +82,56 @@ public class ShipRepository {
                             Timber.d("Ships %s", shipsList);
 
                             for(Ship ship : shipsList.getShips()){
-                                shipDao.save(ship);
+                                save(ship);
                             }
                         });
                     }else{
                         try{
                             SimpleAPIErrorResponse error = new Gson().fromJson(response.errorBody().string(), SimpleAPIErrorResponse.class);
 
-                            //String errorMessage = ctx.getResources().getString(R.string.toast_infirm_create_building_message, error.getMessage());
+                            //String errorMessage = ctx.getResources().getString(R.string.toast_infirm_create_ship_message, error.getMessage());
+                            //Toast.makeText(app.getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+
+                        }catch(IOException e){
+                            //Toast.makeText(app.getApplicationContext(), R.string.toast_infirm_create_default, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ShipsList> call, Throwable t) {
+                    Timber.d(t, "An error occurred while trying to refresh ships");
+                }
+
+            });
+        });
+    }
+
+    public void refreshFleet(String token) {
+        executor.execute(() -> {
+
+            Timber.d("Fetching fresh fleet data with token %s", token);
+            apiClient.fetchFleet(token).enqueue(new Callback<ShipsList>() {
+
+                @Override
+                public void onResponse(Call<ShipsList> call, Response<ShipsList> response) {
+
+                    if (response.isSuccessful()){
+                        Timber.d("Fleet successfully fetched !");
+
+                        executor.execute(() -> {
+                            ShipsList shipsList = response.body();
+                            Timber.d("Ships %s", shipsList);
+
+                            for(Ship ship : shipsList.getShips()){
+                                shipDao.updateBuiltAmount(ship.getShipId(), ship.getBuiltAmount());
+                            }
+                        });
+                    }else{
+                        try{
+                            SimpleAPIErrorResponse error = new Gson().fromJson(response.errorBody().string(), SimpleAPIErrorResponse.class);
+
+                            //String errorMessage = ctx.getResources().getString(R.string.toast_infirm_create_ship_message, error.getMessage());
                             //Toast.makeText(app.getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
 
                         }catch(IOException e){
@@ -101,7 +163,7 @@ public class ShipRepository {
                 public void onResponse(Call<SimpleAPIResponse> call, Response<SimpleAPIResponse> response) {
 
                     if (response.isSuccessful()){
-                        Timber.d("Ships successfully fetched !");
+                        Timber.d("Ships successfully created !");
 
                         executor.execute(() -> {
                             SimpleAPIResponse simpleAPIResponse = response.body();
@@ -109,15 +171,7 @@ public class ShipRepository {
 
                             if(simpleAPIResponse.getCode().equals("ok")){
 
-                                Calendar now = Calendar.getInstance();
-                                ship.setConstructionStart(now.getTime());
-
-                                now.add(Calendar.SECOND, ship.getTimeToBuild());
-                                Date contructionFinish = now.getTime();
-
-                                ship.setConstructionFinish(contructionFinish);
-
-                                shipDao.save(ship);
+                                shipDao.updateTotalAmount(ship.getShipId(), ship.getTotalAmount()+1);
                             }else{
                                 Timber.d("Cannot create ship. API Code : %s", simpleAPIResponse.getCode());
                                 //Print Error

@@ -16,11 +16,11 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/building_item_icon_imageview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
-            android:id="@+id/building_item_icon_imageview"
-            android:src="@drawable/default_factory"/>
+            tools:src="@drawable/building_default"/>
 
         <ProgressBar
             android:id="@+id/building_item_upgrade_progressbar"

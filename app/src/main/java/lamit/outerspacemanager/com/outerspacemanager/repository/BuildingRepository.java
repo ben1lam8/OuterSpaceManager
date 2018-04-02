@@ -49,6 +49,32 @@ public class BuildingRepository {
         return this.buildingDao.loadAll();
     }
 
+    private void save(Building building){
+
+        int updatedRowsCount = 0;
+
+        updatedRowsCount += this.buildingDao.update(
+                building.getBuildingId(),
+                building.getName(),
+                building.getImageUrl(),
+                building.getLevel(),
+                building.isBuilding(),
+                building.getEffect(),
+                building.getAmountOfEffectByLevel(),
+                building.getAmountOfEffectLevel0(),
+                building.getGasCostByLevel(),
+                building.getGasCostLevel0(),
+                building.getMineralCostByLevel(),
+                building.getMineralCostLevel0(),
+                building.getTimeToBuildByLevel(),
+                building.getTimeToBuildLevel0()
+        );
+
+        if (updatedRowsCount > 0) return;
+
+        this.buildingDao.insert(building);
+    }
+
     public void refreshBuildings(String token){
         executor.execute(() -> {
 
@@ -66,7 +92,7 @@ public class BuildingRepository {
                             Timber.d("Buildings %s", buildingsList);
 
                             for(Building building : buildingsList.getBuildings()){
-                                update(building);
+                                save(building);
                             }
 
                             EventBus
@@ -118,17 +144,17 @@ public class BuildingRepository {
         });
     }
 
-    public void createBuilding(Building building, String token){
+    public void upgradeBuilding(Building building, String token){
         executor.execute(() -> {
 
-            Timber.d("Creating fresh %s building with token %s", building.getName(), token);
-            apiClient.createBuilding(building.getBuildingId(), token).enqueue(new Callback<SimpleAPIResponse>() {
+            Timber.d("Upgrading %s building with token %s", building.getName(), token);
+            apiClient.upgradeBuilding(building.getBuildingId(), token).enqueue(new Callback<SimpleAPIResponse>() {
 
                 @Override
                 public void onResponse(Call<SimpleAPIResponse> call, Response<SimpleAPIResponse> response) {
 
                     if (response.isSuccessful()){
-                        Timber.d("Building successfully created !");
+                        Timber.d("Building successfully upgraded !");
 
                         executor.execute(() -> {
                             SimpleAPIResponse simpleAPIResponse = response.body();
@@ -137,22 +163,22 @@ public class BuildingRepository {
                             if(simpleAPIResponse.getCode().equals("ok")){
 
                                 Calendar now = Calendar.getInstance();
-                                building.setConstructionStart(now.getTime());
+
+                                Date upgradeStart = now.getTime();
 
                                 int delayInSeconds = building.getTimeToBuildLevel0()
                                         +building.getTimeToBuildByLevel()
                                         *building.getLevel();
 
                                 now.add(Calendar.SECOND, delayInSeconds);
-                                Date constructionFinish = now.getTime();
+                                Date upgradeFinish = now.getTime();
 
-                                building.setConstructionFinish(constructionFinish);
+                                buildingDao.updateUpgrade(building.getBuildingId(), upgradeStart, upgradeFinish);
 
-                                buildingDao.save(building);
                                 EventBus
                                         .getDefault()
                                         .post(new RepositoryMessageEvent(
-                                                appContext.getString(R.string.toast_confirm_create_building),
+                                                appContext.getString(R.string.toast_confirm_upgrade_building),
                                                 Toast.LENGTH_SHORT)
                                         )
                                 ;
@@ -179,7 +205,7 @@ public class BuildingRepository {
                         try{
                             SimpleAPIErrorResponse error = new Gson().fromJson(response.errorBody().string(), SimpleAPIErrorResponse.class);
 
-                            String errorMessage = appContext.getString(R.string.toast_infirm_create_building_apimessage, error.getMessage());
+                            String errorMessage = appContext.getString(R.string.toast_infirm_upgrade_building_apimessage, error.getMessage());
                             EventBus
                                     .getDefault()
                                     .post(new RepositoryMessageEvent(
@@ -192,7 +218,7 @@ public class BuildingRepository {
                             EventBus
                                     .getDefault()
                                     .post(new RepositoryMessageEvent(
-                                            appContext.getString(R.string.toast_infirm_create_building_exception, e.getMessage()),
+                                            appContext.getString(R.string.toast_infirm_upgrade_building_exception, e.getMessage()),
                                             Toast.LENGTH_LONG)
                                     )
                             ;
@@ -206,7 +232,7 @@ public class BuildingRepository {
                     EventBus
                             .getDefault()
                             .post(new RepositoryMessageEvent(
-                                    appContext.getString(R.string.toast_infirm_create_building_default),
+                                    appContext.getString(R.string.toast_infirm_upgrade_building_default),
                                     Toast.LENGTH_LONG)
                             )
                     ;
@@ -214,26 +240,6 @@ public class BuildingRepository {
 
             });
         });
-    }
-
-    private void update(Building building){
-
-        this.buildingDao.update(
-                building.getBuildingId(),
-                building.getName(),
-                building.getImageUrl(),
-                building.getLevel(),
-                building.isBuilding(),
-                building.getEffect(),
-                building.getAmountOfEffectByLevel(),
-                building.getAmountOfEffectLevel0(),
-                building.getGasCostByLevel(),
-                building.getGasCostLevel0(),
-                building.getMineralCostByLevel(),
-                building.getMineralCostLevel0(),
-                building.getTimeToBuildByLevel(),
-                building.getTimeToBuildLevel0()
-        );
     }
 
 }

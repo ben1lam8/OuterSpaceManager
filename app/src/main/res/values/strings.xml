@@ -59,7 +59,7 @@
     <string name="ship_item_attack">Attack : %1$d-%2$d HP</string>
     <string name="ship_item_speed">Speed : %1$d</string>
     <string name="ship_item_gas">Gas : %1$d</string>
-    <string name="ship_item_mineral">Mineral : %1$d</string>
+    <string name="ship_item_minerals">Mineral : %1$d</string>
     <string name="ship_item_spatioport">Spatioport level needed : %1$d</string>
 
     <!-- ACTIVITY/FRAGMENT/ITEM : Galaxy -->
@@ -89,18 +89,18 @@
 
     <!-- API : Building -->
 
-    <string name="toast_confirm_create_building">Construction lancée !</string>
+    <string name="toast_confirm_upgrade_building">Amélioration lancée !</string>
     <string name="toast_confirm_fetch_buildings">Données des bâtiments synchronisées</string>
-    <string name="toast_infirm_create_building_apimessage">Construction impossible (%1$s)</string>
-    <string name="toast_infirm_create_building_exception">Construction impossible (%1$s)</string>
-    <string name="toast_infirm_create_building_default">Les données des bâtiments n\'ont pu être récupérées</string>
-    <string name="toast_infirm_create_building_not_found">Ce bâtiment n\'existe pas</string>
-    <string name="toast_infirm_create_building_invalid_request">Requête invalide</string>
-    <string name="toast_infirm_create_building_in_queue">Ce bâtiment est déjà en cours d\'amélioration</string>
-    <string name="toast_infirm_create_building_not_enough_resources">Pas assez de ressources</string>
-    <string name="toast_infirm_create_building_invalid_token">Authentification du joueur impossible</string>
-    <string name="toast_infirm_create_building_bad_response">Le serveur n\'a pas pu traîter la requête</string>
-    <string name="toast_infirm_create_building_internal_error">Une erreur serveur est survenue</string>
+    <string name="toast_infirm_upgrade_building_apimessage">Amélioration impossible (%1$s)</string>
+    <string name="toast_infirm_upgrade_building_exception">Amélioration impossible (%1$s)</string>
+    <string name="toast_infirm_upgrade_building_default">Les données des bâtiments n\'ont pu être récupérées</string>
+    <string name="toast_infirm_upgrade_building_not_found">Ce bâtiment n\'existe pas</string>
+    <string name="toast_infirm_upgrade_building_invalid_request">Requête invalide</string>
+    <string name="toast_infirm_upgrade_building_in_queue">Ce bâtiment est déjà en cours d\'amélioration</string>
+    <string name="toast_infirm_upgrade_building_not_enough_resources">Pas assez de ressources</string>
+    <string name="toast_infirm_upgrade_building_invalid_token">Authentification du joueur impossible</string>
+    <string name="toast_infirm_upgrade_building_bad_response">Le serveur n\'a pas pu traîter la requête</string>
+    <string name="toast_infirm_upgrade_building_internal_error">Une erreur serveur est survenue</string>
     <string name="toast_infirm_fetch_buildings_exception">Les données des bâtiments n\'ont pu être récupérées (%1$s)</string>
     <string name="toast_infirm_fetch_buildings_apimessage">Les données des bâtiments n\'ont pu être récupérées (%1$s)</string>
     <string name="toast_infirm_fetch_buildings_default">Les données des bâtiments n\'ont pu être récupérées</string>
@@ -128,6 +128,10 @@
     <string name="userstats_mineral_multiplier_textview">(multiplier : %1$d)</string>
     <string name="main_minerals_imageview">minerals</string>
     <string name="main_gas_imageview">gas</string>
-    <string name="building_item_upgrade_remaining_time">UPGRADING (%1$d s. remaining)</string>
+    <string name="building_item_upgrade_remaining_time">EN AMÉLIORATION (reste %1$d s.)</string>
+    <string name="ship_item_create">CONSTRUIRE (%1$d sec)</string>
+    <string name="ship_item_stats_textview">Stats</string>
+    <string name="ship_item_price_textview">Prix</string>
+    <string name="ship_item_amount">x%1$d (%2$d à venir)</string>
 
 </resources>

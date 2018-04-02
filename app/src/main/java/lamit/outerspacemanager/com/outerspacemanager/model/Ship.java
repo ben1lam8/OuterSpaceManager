@@ -4,7 +4,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
-import java.util.Date;
+import com.google.gson.annotations.SerializedName;
 
 @Entity
 public class Ship {
@@ -16,6 +16,12 @@ public class Ship {
 
     @Expose
     private String name;
+
+    @Expose
+    @SerializedName("amount")
+    private int builtAmount;
+
+    private int totalAmount;
 
     @Expose
     private int life;
@@ -44,13 +50,11 @@ public class Ship {
     @Expose
     private int timeToBuild;
 
-    private Date constructionStart;
-
-    private Date constructionFinish;
-
-    public Ship(@NonNull int shipId, String name, int life, int shield, int minAttack, int maxAttack, int speed, int mineralCost, int gasCost, int spatioportLevelNeeded, int timeToBuild, Date constructionStart, Date constructionFinish) {
+    public Ship(@NonNull int shipId, String name, int builtAmount, int totalAmount, int life, int shield, int minAttack, int maxAttack, int speed, int mineralCost, int gasCost, int spatioportLevelNeeded, int timeToBuild) {
         this.shipId = shipId;
         this.name = name;
+        this.builtAmount = builtAmount;
+        this.totalAmount = totalAmount;
         this.life = life;
         this.shield = shield;
         this.minAttack = minAttack;
@@ -60,8 +64,6 @@ public class Ship {
         this.gasCost = gasCost;
         this.spatioportLevelNeeded = spatioportLevelNeeded;
         this.timeToBuild = timeToBuild;
-        this.constructionStart = constructionStart;
-        this.constructionFinish = constructionFinish;
     }
 
     public int getShipId() {
@@ -79,6 +81,24 @@ public class Ship {
 
     public Ship setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public int getBuiltAmount() {
+        return builtAmount;
+    }
+
+    public Ship setBuiltAmount(int builtAmount) {
+        this.builtAmount = builtAmount;
+        return this;
+    }
+
+    public int getTotalAmount() {
+        return totalAmount;
+    }
+
+    public Ship setTotalAmount(int totalAmount) {
+        this.totalAmount = totalAmount;
         return this;
     }
 
@@ -163,31 +183,14 @@ public class Ship {
         return this;
     }
 
-    public Date getConstructionStart() {
-        return constructionStart;
-    }
-
-    public Ship setConstructionStart(Date constructionStart) {
-        this.constructionStart = constructionStart;
-        return this;
-    }
-
-    public Date getConstructionFinish() {
-        return constructionFinish;
-    }
-
-    public Ship setConstructionFinish(Date constructFinish) {
-        this.constructionFinish = constructFinish;
-        return this;
-    }
-
     @Override
     public String toString() {
 
         return String.format(
-                "Ship {id : %s, name : %s}",
+                "Ship {id : %s, name : %s, builtAmount: %s}",
                 this.shipId,
-                this.name
+                this.name,
+                this.builtAmount
         );
     }
 }

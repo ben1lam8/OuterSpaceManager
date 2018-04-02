@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -20,8 +19,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import lamit.outerspacemanager.com.outerspacemanager.model.Building;
 import lamit.outerspacemanager.com.outerspacemanager.R;
-import timber.log.Timber;
-//import lamit.outerspacemanager.com.outerspacemanager.services.DownloadImageTask;
 
 public class BuildingsListItemAdapter extends ArrayAdapter<Building>{
 
@@ -70,10 +67,10 @@ public class BuildingsListItemAdapter extends ArrayAdapter<Building>{
         String levelText = getContext().getString(R.string.building_item_level, currentBuilding.getLevel());
         holder.levelTextView.setText(levelText);
 
-        if(currentBuilding.getConstructionFinish() != null && currentBuilding.getConstructionFinish().after(new Date())){
+        if(currentBuilding.getUpgradeFinish() != null && currentBuilding.getUpgradeFinish().after(new Date())){
 
-            long totalTime = TimeUnit.MILLISECONDS.toSeconds(currentBuilding.getConstructionFinish().getTime() - currentBuilding.getConstructionStart().getTime());
-            long remainingTime = TimeUnit.MILLISECONDS.toSeconds(currentBuilding.getConstructionFinish().getTime() - new Date().getTime());
+            long totalTime = TimeUnit.MILLISECONDS.toSeconds(currentBuilding.getUpgradeFinish().getTime() - currentBuilding.getUpgradeStart().getTime());
+            long remainingTime = TimeUnit.MILLISECONDS.toSeconds(currentBuilding.getUpgradeFinish().getTime() - new Date().getTime());
             long elapsedTime = totalTime - remainingTime;
 
             int progress = (int) (elapsedTime*100/totalTime);

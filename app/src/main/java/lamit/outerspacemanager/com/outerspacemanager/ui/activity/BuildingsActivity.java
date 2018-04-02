@@ -55,7 +55,7 @@ public class BuildingsActivity extends AppCompatActivity implements HasSupportFr
         Timber.d("Views binded");
 
         // Now listen...
-        Timber.d("Listening to data mutations and UI events...");
+        Timber.d("Listening to data mutations...");
     }
 
     private void configureDagger(){ AndroidInjection.inject(this); }

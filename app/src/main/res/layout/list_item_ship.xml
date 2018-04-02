@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="4dp"
     android:paddingBottom="4dp"
@@ -8,41 +10,53 @@
     android:paddingRight="4dp">
 
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_width="0dp"
+        android:layout_weight="3"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
             android:id="@+id/ship_item_icon_imageview"
-            android:src="@drawable/default_factory"/>
-
-        <TextView
-            android:id="@+id/ship_item_name_textview"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:textSize="20dp"
-            android:text="NAME"
+            android:scaleType="fitCenter"
+            tools:src="@drawable/ship_default"
             />
 
         <TextView
-            android:id="@+id/ship_item_time_textview"
+            android:id="@+id/ship_item_name_textview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="10dp"
-            android:text="BUILD"
+            android:textSize="20sp"
+            tools:text="NAME"
+            />
+
+        <TextView
+            android:id="@+id/ship_item_amount_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16sp"
+            tools:text="xXX (XX pending)"
+            />
+
+        <TextView
+            android:id="@+id/ship_item_create_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="18sp"
+            tools:text="CONSTRUIRE (xx s.)"
             />
     </LinearLayout>
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="5"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/ship_list_item_text_margin_start"
-        android:layout_marginLeft="@dimen/ship_list_item_text_margin_start"
         android:orientation="vertical">
 
         <TextView
@@ -50,8 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="16dp"
-            android:text="Stats"
+            android:textSize="16sp"
+            android:text="@string/ship_item_stats_textview"
             />
 
         <TextView
@@ -59,8 +73,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textSize="16dp"
-            android:text="life : xxx hp"
+            android:textSize="16sp"
+            tools:text="life : xxx hp"
             />
 
         <TextView
@@ -68,8 +82,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textSize="16dp"
-            android:text="shield : xxx hp"
+            android:textSize="16sp"
+            tools:text="shield : xxx hp"
             />
 
         <TextView
@@ -77,8 +91,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textSize="16dp"
-            android:text="attack : xx-xx"
+            android:textSize="16sp"
+            tools:text="attack : xx-xx"
             />
 
         <TextView
@@ -86,8 +100,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textSize="16dp"
-            android:text="speed : xx-xx"
+            android:textSize="16sp"
+            tools:text="speed : xx-xx"
             />
 
         <TextView
@@ -95,33 +109,63 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="16dp"
-            android:text="Price"
+            android:textSize="16sp"
+            android:text="@string/ship_item_price_textview"
             />
 
-        <TextView
-            android:id="@+id/ship_item_gas_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textSize="16dp"
-            android:text="Gas : xxx"
-            />
 
-        <TextView
-            android:id="@+id/ship_item_mineral_textview"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="16dp"
-            android:text="Mineral : xxx"
-            />
+            android:layout_height="wrap_content"
+            android:stretchColumns="0,1">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/minerals_imageview_side"
+                    android:layout_height="@dimen/minerals_imageview_side"
+                    android:contentDescription="@string/main_minerals_imageview"
+                    android:src="@drawable/minerals" />
+
+                <ImageView
+                    android:layout_width="@dimen/gas_imageview_side"
+                    android:layout_height="@dimen/gas_imageview_side"
+                    android:contentDescription="@string/main_gas_imageview"
+                    android:src="@drawable/gas" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/ship_item_minerals_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    tools:text="xxxxx"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/ship_item_gas_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    tools:text="xxxxx"
+                    android:textSize="16sp" />
+            </TableRow>
+        </TableLayout>
 
         <TextView
             android:id="@+id/ship_item_spatioport_textview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="16dp"
-            android:text="Spatioport level needed : xxx"
+            android:textSize="16sp"
+            tools:text="Spatioport level needed : xxx"
             />
 
     </LinearLayout>

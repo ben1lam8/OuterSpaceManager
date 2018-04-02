@@ -7,7 +7,7 @@ import lamit.outerspacemanager.com.outerspacemanager.model.Search;
 import lamit.outerspacemanager.com.outerspacemanager.model.Ship;
 import lamit.outerspacemanager.com.outerspacemanager.model.User;
 
-@Database(entities = {User.class, Building.class, Ship.class, Search.class}, version = 5)
+@Database(entities = {User.class, Building.class, Ship.class, Search.class}, version = 8)
 @TypeConverters(DateConverter.class)
 public abstract class RoomDatabase extends android.arch.persistence.room.RoomDatabase{
 

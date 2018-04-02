@@ -20,6 +20,27 @@ public interface ShipDao {
     LiveData<List<Ship>> loadAll();
 
     @Insert(onConflict = REPLACE)
-    void save(Ship ship);
+    void insert(Ship ship);
+
+    @Query("UPDATE ship SET name = :name, life = :life, shield = :shield, minAttack = :minAttack, maxAttack = :maxAttack, speed = :speed, mineralCost = :mineralCost, gasCost = :gasCost, spatioportLevelNeeded = :spatioportLevelNeeded, timeToBuild = :timeToBuild WHERE shipId = :id")
+    int update(
+            int id,
+            String name,
+            int life,
+            int shield,
+            int minAttack,
+            int maxAttack,
+            int speed,
+            int mineralCost,
+            int gasCost,
+            int spatioportLevelNeeded,
+            int timeToBuild
+    );
+
+    @Query("UPDATE ship SET builtAmount = :builtAmount WHERE shipId = :id")
+    int updateBuiltAmount(int id, int builtAmount);
+
+    @Query("UPDATE ship SET totalAmount = :totalAmount WHERE shipId = :id")
+    int updateTotalAmount(int id, int totalAmount);
 }
 

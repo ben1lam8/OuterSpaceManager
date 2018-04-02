@@ -53,11 +53,11 @@ public class Building {
     @Expose
     private int timeToBuildLevel0;
 
-    private Date constructionStart;
+    private Date upgradeStart;
 
-    private Date constructionFinish;
+    private Date upgradeFinish;
 
-    public Building(@NonNull int buildingId, String name, String imageUrl, int level, boolean building, int amountOfEffectByLevel, int amountOfEffectLevel0, String effect, int gasCostByLevel, int gasCostLevel0, int mineralCostByLevel, int mineralCostLevel0, int timeToBuildByLevel, int timeToBuildLevel0, Date constructionStart, Date constructionFinish) {
+    public Building(@NonNull int buildingId, String name, String imageUrl, int level, boolean building, int amountOfEffectByLevel, int amountOfEffectLevel0, String effect, int gasCostByLevel, int gasCostLevel0, int mineralCostByLevel, int mineralCostLevel0, int timeToBuildByLevel, int timeToBuildLevel0, Date upgradeStart, Date upgradeFinish) {
         this.buildingId = buildingId;
         this.name = name;
         this.imageUrl = imageUrl;
@@ -72,8 +72,8 @@ public class Building {
         this.mineralCostLevel0 = mineralCostLevel0;
         this.timeToBuildByLevel = timeToBuildByLevel;
         this.timeToBuildLevel0 = timeToBuildLevel0;
-        this.constructionStart = constructionStart;
-        this.constructionFinish = constructionFinish;
+        this.upgradeStart = upgradeStart;
+        this.upgradeFinish = upgradeFinish;
     }
 
     public int getLevel() {
@@ -202,21 +202,21 @@ public class Building {
         return this;
     }
 
-    public Date getConstructionStart() {
-        return constructionStart;
+    public Date getUpgradeStart() {
+        return upgradeStart;
     }
 
-    public Building setConstructionStart(Date constructionStart) {
-        this.constructionStart = constructionStart;
+    public Building setUpgradeStart(Date upgradeStart) {
+        this.upgradeStart = upgradeStart;
         return this;
     }
 
-    public Date getConstructionFinish() {
-        return constructionFinish;
+    public Date getUpgradeFinish() {
+        return upgradeFinish;
     }
 
-    public Building setConstructionFinish(Date constructionFinish) {
-        this.constructionFinish = constructionFinish;
+    public Building setUpgradeFinish(Date upgradeFinish) {
+        this.upgradeFinish = upgradeFinish;
         return this;
     }
 

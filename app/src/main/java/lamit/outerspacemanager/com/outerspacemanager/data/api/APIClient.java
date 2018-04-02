@@ -36,7 +36,7 @@ public interface APIClient {
     Call<BuildingsList> fetchBuildingsList(@Header("x-access-token") String token);
 
     @POST("/api/v1/buildings/create/{buildingId}")
-    Call<SimpleAPIResponse> createBuilding(@Path("buildingId") int buildingId, @Header("x-access-token") String token);
+    Call<SimpleAPIResponse> upgradeBuilding(@Path("buildingId") int buildingId, @Header("x-access-token") String token);
 
     // SHIP
 

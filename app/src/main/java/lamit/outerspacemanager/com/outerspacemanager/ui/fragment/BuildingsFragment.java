@@ -10,31 +10,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.OnItemClick;
 import dagger.android.support.AndroidSupportInjection;
 import lamit.outerspacemanager.com.outerspacemanager.R;
 import lamit.outerspacemanager.com.outerspacemanager.model.Building;
-import lamit.outerspacemanager.com.outerspacemanager.model.User;
 import lamit.outerspacemanager.com.outerspacemanager.ui.adapter.BuildingsListItemAdapter;
 import lamit.outerspacemanager.com.outerspacemanager.viewmodel.BuildingsViewModel;
-import lamit.outerspacemanager.com.outerspacemanager.viewmodel.MainViewModel;
 import timber.log.Timber;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class BuildingsFragment extends Fragment {
 
     @Inject
@@ -111,7 +102,5 @@ public class BuildingsFragment extends Fragment {
     }
 
     @OnItemClick(R.id.buildings_listview)
-    public void onItemClick(int position){
-        this.vm.createBuilding(position);
-    }
+    public void onItemClick(int position){ this.vm.upgradeBuilding(position); }
 }

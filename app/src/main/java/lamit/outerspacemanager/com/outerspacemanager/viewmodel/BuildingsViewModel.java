@@ -50,11 +50,11 @@ public class BuildingsViewModel extends ViewModel {
         }
     }
 
-    public void createBuilding(int index){
+    public void upgradeBuilding(int index){
 
         if (this.buildings.getValue() == null || this.getUser().getValue() == null) return;
 
         Building building = this.buildings.getValue().get(index);
-        this.buildingRepo.createBuilding(building, this.getUser().getValue().getToken());
+        this.buildingRepo.upgradeBuilding(building, this.getUser().getValue().getToken());
     }
 }

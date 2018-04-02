@@ -1,0 +1,399 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 6,
+    "identityHash": "0eae338503a91a1878ea2051b0350041",
+    "entities": [
+      {
+        "tableName": "User",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`username` TEXT NOT NULL, `points` INTEGER NOT NULL, `mineralModifier` INTEGER NOT NULL, `minerals` REAL NOT NULL, `gasModifier` INTEGER NOT NULL, `gas` REAL NOT NULL, `token` TEXT, `expires` INTEGER, `lastConnection` INTEGER, `lastRefresh` INTEGER, PRIMARY KEY(`username`))",
+        "fields": [
+          {
+            "fieldPath": "username",
+            "columnName": "username",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "points",
+            "columnName": "points",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mineralModifier",
+            "columnName": "mineralModifier",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minerals",
+            "columnName": "minerals",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gasModifier",
+            "columnName": "gasModifier",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gas",
+            "columnName": "gas",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "token",
+            "columnName": "token",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "expires",
+            "columnName": "expires",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastConnection",
+            "columnName": "lastConnection",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastRefresh",
+            "columnName": "lastRefresh",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "username"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Building",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`buildingId` INTEGER NOT NULL, `name` TEXT, `imageUrl` TEXT, `level` INTEGER NOT NULL, `building` INTEGER NOT NULL, `effect` TEXT, `amountOfEffectByLevel` INTEGER NOT NULL, `amountOfEffectLevel0` INTEGER NOT NULL, `gasCostByLevel` INTEGER NOT NULL, `gasCostLevel0` INTEGER NOT NULL, `mineralCostByLevel` INTEGER NOT NULL, `mineralCostLevel0` INTEGER NOT NULL, `timeToBuildByLevel` INTEGER NOT NULL, `timeToBuildLevel0` INTEGER NOT NULL, `constructionStart` INTEGER, `constructionFinish` INTEGER, PRIMARY KEY(`buildingId`))",
+        "fields": [
+          {
+            "fieldPath": "buildingId",
+            "columnName": "buildingId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imageUrl",
+            "columnName": "imageUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "level",
+            "columnName": "level",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "building",
+            "columnName": "building",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "effect",
+            "columnName": "effect",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "amountOfEffectByLevel",
+            "columnName": "amountOfEffectByLevel",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "amountOfEffectLevel0",
+            "columnName": "amountOfEffectLevel0",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gasCostByLevel",
+            "columnName": "gasCostByLevel",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gasCostLevel0",
+            "columnName": "gasCostLevel0",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mineralCostByLevel",
+            "columnName": "mineralCostByLevel",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mineralCostLevel0",
+            "columnName": "mineralCostLevel0",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeToBuildByLevel",
+            "columnName": "timeToBuildByLevel",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeToBuildLevel0",
+            "columnName": "timeToBuildLevel0",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "constructionStart",
+            "columnName": "constructionStart",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "constructionFinish",
+            "columnName": "constructionFinish",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "buildingId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Ship",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`shipId` INTEGER NOT NULL, `name` TEXT, `amount` INTEGER NOT NULL, `life` INTEGER NOT NULL, `shield` INTEGER NOT NULL, `minAttack` INTEGER NOT NULL, `maxAttack` INTEGER NOT NULL, `speed` INTEGER NOT NULL, `mineralCost` INTEGER NOT NULL, `gasCost` INTEGER NOT NULL, `spatioportLevelNeeded` INTEGER NOT NULL, `timeToBuild` INTEGER NOT NULL, `constructionStart` INTEGER, `constructionFinish` INTEGER, PRIMARY KEY(`shipId`))",
+        "fields": [
+          {
+            "fieldPath": "shipId",
+            "columnName": "shipId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "amount",
+            "columnName": "amount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "life",
+            "columnName": "life",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "shield",
+            "columnName": "shield",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minAttack",
+            "columnName": "minAttack",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxAttack",
+            "columnName": "maxAttack",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "speed",
+            "columnName": "speed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mineralCost",
+            "columnName": "mineralCost",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gasCost",
+            "columnName": "gasCost",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "spatioportLevelNeeded",
+            "columnName": "spatioportLevelNeeded",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeToBuild",
+            "columnName": "timeToBuild",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "constructionStart",
+            "columnName": "constructionStart",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "constructionFinish",
+            "columnName": "constructionFinish",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "shipId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Search",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`searchId` INTEGER NOT NULL, `name` TEXT, `level` INTEGER NOT NULL, `building` INTEGER NOT NULL, `effect` TEXT, `amountOfEffectByLevel` INTEGER NOT NULL, `amountOfEffectLevel0` INTEGER NOT NULL, `gasCostByLevel` INTEGER NOT NULL, `gasCostLevel0` INTEGER NOT NULL, `mineralCostByLevel` INTEGER NOT NULL, `mineralCostLevel0` INTEGER NOT NULL, `timeToBuildByLevel` INTEGER NOT NULL, `timeToBuildLevel0` INTEGER NOT NULL, `constructionStart` INTEGER, `constructionFinish` INTEGER, PRIMARY KEY(`searchId`))",
+        "fields": [
+          {
+            "fieldPath": "searchId",
+            "columnName": "searchId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "level",
+            "columnName": "level",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "building",
+            "columnName": "building",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "effect",
+            "columnName": "effect",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "amountOfEffectByLevel",
+            "columnName": "amountOfEffectByLevel",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "amountOfEffectLevel0",
+            "columnName": "amountOfEffectLevel0",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gasCostByLevel",
+            "columnName": "gasCostByLevel",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gasCostLevel0",
+            "columnName": "gasCostLevel0",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mineralCostByLevel",
+            "columnName": "mineralCostByLevel",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mineralCostLevel0",
+            "columnName": "mineralCostLevel0",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeToBuildByLevel",
+            "columnName": "timeToBuildByLevel",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeToBuildLevel0",
+            "columnName": "timeToBuildLevel0",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "constructionStart",
+            "columnName": "constructionStart",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "constructionFinish",
+            "columnName": "constructionFinish",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "searchId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0eae338503a91a1878ea2051b0350041\")"
+    ]
+  }
+}

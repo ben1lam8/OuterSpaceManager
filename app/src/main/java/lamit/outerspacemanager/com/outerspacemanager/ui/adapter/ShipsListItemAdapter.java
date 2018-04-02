@@ -8,77 +8,95 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import lamit.outerspacemanager.com.outerspacemanager.model.Ship;
-import lamit.outerspacemanager.com.outerspacemanager.ui.activity.ShipyardActivity;
 import lamit.outerspacemanager.com.outerspacemanager.R;
 
 public class ShipsListItemAdapter extends ArrayAdapter<Ship>{
 
-    private final Context context;
-    private ArrayList<Ship> shipsList;
+    public ShipsListItemAdapter(Context context){
+        super(context, 0);
+    }
 
-    public ShipsListItemAdapter(ShipyardActivity shipsActivity, ArrayList<Ship> shipsList) {
-        super(shipsActivity, -1, shipsList);
-        this.context = shipsActivity;
-        this.shipsList = shipsList;
+    public void setObjects(List<Ship> shipsList){
+        this.clear();
+        this.addAll(shipsList);
+    }
+
+    static class ViewHolder {
+        @BindView(R.id.ship_item_icon_imageview)        ImageView iconImageView;
+        @BindView(R.id.ship_item_name_textview)         TextView nameTextView;
+        @BindView(R.id.ship_item_amount_textview)       TextView amountTextView;
+        @BindView(R.id.ship_item_create_textview)       TextView createTextView;
+        @BindView(R.id.ship_item_life_textview)         TextView lifeTextView;
+        @BindView(R.id.ship_item_shield_textview)       TextView shieldTextView;
+        @BindView(R.id.ship_item_attack_textview)       TextView attackTextView;
+        @BindView(R.id.ship_item_speed_textview)        TextView speedTextView;
+        @BindView(R.id.ship_item_gas_textview)          TextView gasTextView;
+        @BindView(R.id.ship_item_minerals_textview)     TextView mineralsTextView;
+        @BindView(R.id.ship_item_spatioport_textview)   TextView spatioportTextView;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        //TODO: use ViewHolder
+        ShipsListItemAdapter.ViewHolder holder;
+        if (convertView != null) {
+            holder = (ShipsListItemAdapter.ViewHolder) convertView.getTag();
+        } else {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_ship, parent, false);
+            holder = new ShipsListItemAdapter.ViewHolder(convertView);
+            convertView.setTag(holder);
+        }
 
-        // Élément courant
-        Ship currentShip = shipsList.get(position);
+        Ship currentShip = getItem(position);
 
-        // Inflation du layout de la ligne
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        switch(currentShip.getShipId()){
+            case 0:
+                holder.iconImageView.setImageResource(R.drawable.light_fighter);
+                break;
+            case 1:
+                holder.iconImageView.setImageResource(R.drawable.heavy_fighter);
+                break;
+            case 2:
+                holder.iconImageView.setImageResource(R.drawable.probe);
+                break;
+            case 3:
+                holder.iconImageView.setImageResource(R.drawable.destroyer);
+                break;
+            case 4:
+                holder.iconImageView.setImageResource(R.drawable.death_star);
+                break;
+        }
 
-        View rowView = inflater.inflate(R.layout.list_item_ship, parent, false);
+        holder.nameTextView.setText(currentShip.getName());
 
-        // Récupération des widgets
-        ImageView iconImageView = (ImageView) rowView.findViewById(R.id.ship_item_icon_imageview);
-        TextView nameTextView = (TextView) rowView.findViewById(R.id.ship_item_name_textview);
+        int pendingAmount = currentShip.getTotalAmount() - currentShip.getBuiltAmount();
+        holder.amountTextView.setText(getContext().getString(R.string.ship_item_amount, currentShip.getBuiltAmount(), pendingAmount));
 
-        TextView lifeTextView = (TextView) rowView.findViewById(R.id.ship_item_life_textview);
-        TextView shieldTextView = (TextView) rowView.findViewById(R.id.ship_item_shield_textview);
-        TextView attackTextView = (TextView) rowView.findViewById(R.id.ship_item_attack_textview);
-        TextView speedTextView = (TextView) rowView.findViewById(R.id.ship_item_speed_textview);
+        holder.createTextView.setText(getContext().getString(R.string.ship_item_create, currentShip.getTimeToBuild()));
 
-        TextView gasTextView = (TextView) rowView.findViewById(R.id.ship_item_gas_textview);
-        TextView mineralTextView = (TextView) rowView.findViewById(R.id.ship_item_mineral_textview);
-        TextView spatioportTextView = (TextView) rowView.findViewById(R.id.ship_item_spatioport_textview);
+        holder.lifeTextView.setText(getContext().getString(R.string.ship_item_life, currentShip.getLife()));
 
-        // Initialisation des widgets
-        //new DownloadImageTask(iconImageView).execute(currentShip.getImageUrl());
+        holder.shieldTextView.setText(getContext().getString(R.string.ship_item_shield, currentShip.getShield()));
 
-        nameTextView.setText(currentShip.getName());
+        holder.attackTextView.setText(getContext().getString(R.string.ship_item_attack, currentShip.getMinAttack(), currentShip.getMaxAttack()));
 
-        String lifeText = context.getResources().getString(R.string.ship_item_life, currentShip.getLife());
-        lifeTextView.setText(lifeText);
+        holder.speedTextView.setText(getContext().getString(R.string.ship_item_speed, currentShip.getSpeed()));
 
-        String shieldText = context.getResources().getString(R.string.ship_item_shield, currentShip.getShield());
-        shieldTextView.setText(shieldText);
+        holder.gasTextView.setText(getContext().getString(R.string.ship_item_gas, currentShip.getGasCost()));
 
-        String attackText = context.getResources().getString(R.string.ship_item_attack, currentShip.getMinAttack(), currentShip.getMaxAttack());
-        attackTextView.setText(attackText);
+        holder.mineralsTextView.setText(getContext().getString(R.string.ship_item_minerals, currentShip.getMineralCost()));
 
-        String speedText = context.getResources().getString(R.string.ship_item_speed, currentShip.getSpeed());
-        speedTextView.setText(speedText);
+        holder.spatioportTextView.setText(getContext().getString(R.string.ship_item_spatioport, currentShip.getSpatioportLevelNeeded()));
 
-        String gasText = context.getResources().getString(R.string.ship_item_gas, currentShip.getGasCost());
-        gasTextView.setText(gasText);
-
-        String mineralText = context.getResources().getString(R.string.ship_item_mineral, currentShip.getMineralCost());
-        mineralTextView.setText(mineralText);
-
-        //TODO: display next line only if needed
-
-        String spatioportText = context.getResources().getString(R.string.ship_item_spatioport, currentShip.getSpatioportLevelNeeded());
-        spatioportTextView.setText(spatioportText);
-
-        return rowView;
+        return convertView;
     }
 }
