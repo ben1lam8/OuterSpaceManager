@@ -102,24 +102,24 @@ public class MainFragment extends Fragment {
     @OnClick(R.id.main_buildings_button)
     public void showBuildingsDetail(Button button){
         Timber.d("Click on %s", button.getText());
-        this.vm.replaceDetailFragment(new BuildingsFragment());
+        this.vm.replaceDetailFragment(MainViewModel.BUILDING_FRAGMENT_TAG);
     }
 
     @OnClick(R.id.main_lab_button)
     public void showSearchesDetail(Button button){
         Timber.d("Click on %s", button.getText());
-        this.vm.replaceDetailFragment(new SearchesFragment());
+        this.vm.replaceDetailFragment(MainViewModel.SEARCHES_FRAGMENT_TAG);
     }
 
     @OnClick(R.id.main_shipyard_button)
     public void showShipyardDetail(Button button){
         Timber.d("Click on %s", button.getText());
-        this.vm.replaceDetailFragment(new ShipyardFragment());
+        this.vm.replaceDetailFragment(MainViewModel.SHIPYARD_FRAGMENT_TAG);
     }
 
     @OnClick(R.id.main_galaxy_button)
     public void showGalaxyDetail(Button button){
         Timber.d("Click on %s", button.getText());
-        this.vm.replaceDetailFragment(new GalaxyFragment());
+        this.vm.replaceDetailFragment(MainViewModel.GALAXY_FRAGMENT_TAG);
     }
 }

@@ -17,7 +17,12 @@ public class MainViewModel extends ViewModel{
     private UserRepository userRepo;
     private LiveData<User> user;
 
-    private MutableLiveData<Fragment> currentDetailFragment;
+    private MutableLiveData<String> currentDetailFragmentTag;
+
+    public static final String BUILDING_FRAGMENT_TAG = "buildings_fragment";
+    public static final String SEARCHES_FRAGMENT_TAG = "searches_fragment";
+    public static final String SHIPYARD_FRAGMENT_TAG = "shipyard_fragment";
+    public static final String GALAXY_FRAGMENT_TAG = "galaxy_fragment";
 
     @Inject
     public MainViewModel(UserRepository userRepo) {
@@ -30,8 +35,8 @@ public class MainViewModel extends ViewModel{
             this.user = userRepo.getLastConnectedFreshUser();
         }
 
-        if (this.currentDetailFragment == null){
-            this.currentDetailFragment = new MutableLiveData<>();
+        if (this.currentDetailFragmentTag == null){
+            this.currentDetailFragmentTag = new MutableLiveData<>();
         }
     }
 
@@ -54,11 +59,11 @@ public class MainViewModel extends ViewModel{
         Timber.d("%s disconnected", this.user.getValue().getUsername());
     }
 
-    public MutableLiveData<Fragment> getCurrentDetailFragment(){
-        return this.currentDetailFragment;
+    public MutableLiveData<String> getCurrentDetailFragmentTag(){
+        return this.currentDetailFragmentTag;
     }
 
-    public void replaceDetailFragment(Fragment fragment){
-        this.currentDetailFragment.setValue(fragment);
+    public void replaceDetailFragment(String tag){
+        this.currentDetailFragmentTag.setValue(tag);
     }
 }

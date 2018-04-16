@@ -1,6 +1,7 @@
 package lamit.outerspacemanager.com.outerspacemanager.ui.adapter;
 
 import android.content.Context;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,17 +71,43 @@ public class BuildingsListItemAdapter extends ArrayAdapter<Building>{
 
         if(currentBuilding.getUpgradeFinish() != null && currentBuilding.getUpgradeFinish().after(new Date())){
 
-            long totalTime = TimeUnit.MILLISECONDS.toSeconds(currentBuilding.getUpgradeFinish().getTime() - currentBuilding.getUpgradeStart().getTime());
-            long remainingTime = TimeUnit.MILLISECONDS.toSeconds(currentBuilding.getUpgradeFinish().getTime() - new Date().getTime());
-            long elapsedTime = totalTime - remainingTime;
-
-            int progress = (int) (elapsedTime*100/totalTime);
-
-            holder.upgradeProgressBar.setProgress(progress);
             holder.upgradeProgressBar.setVisibility(View.VISIBLE);
 
-            String timeText = getContext().getString(R.string.building_item_upgrade_remaining_time, remainingTime);
-            holder.upgradeTextView.setText(timeText);
+            long totalTime = currentBuilding.getUpgradeFinish().getTime() - currentBuilding.getUpgradeStart().getTime();
+            long remainingTime = currentBuilding.getUpgradeFinish().getTime() - new Date().getTime();
+
+            CountDownTimer countDownTimer = new CountDownTimer(remainingTime, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+
+                    long seconds = millisUntilFinished/1000;//convert to seconds
+                    long minutes = seconds / 60;//convert to minutes
+                    long hours = minutes / 60;//convert to hours
+
+                    if(minutes > 0)//if we have minutes, then there might be some remainder seconds
+                        seconds = seconds % 60;//seconds can be between 0-60, so we use the % operator to get the remainder
+                    if(hours > 0)
+                        minutes = minutes % 60;//similar to seconds
+
+                    String timeText = getContext().getString(R.string.building_item_upgrade_remaining_time, hours, minutes, seconds);
+                    holder.upgradeTextView.setText(timeText);
+
+                    long elapsedTime = totalTime - millisUntilFinished;
+                    int progress = (int) (elapsedTime*100/totalTime);
+
+                    holder.upgradeProgressBar.setProgress(progress);
+                }
+                @Override
+                public void onFinish() {
+                    holder.upgradeProgressBar.setVisibility(View.INVISIBLE);
+
+                    int nextLevelTime = currentBuilding.getTimeToBuildByLevel()*nextLevel+currentBuilding.getTimeToBuildLevel0();
+                    String timeText = getContext().getString(R.string.building_item_upgrade_total_time, nextLevelTime);
+                    holder.upgradeTextView.setText(timeText);
+                }
+            };
+            countDownTimer.start();
+
         }else{
 
             holder.upgradeProgressBar.setVisibility(View.INVISIBLE);

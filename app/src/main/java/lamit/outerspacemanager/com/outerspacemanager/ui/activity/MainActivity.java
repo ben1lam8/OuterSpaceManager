@@ -23,7 +23,10 @@ import dagger.android.support.HasSupportFragmentInjector;
 import lamit.outerspacemanager.com.outerspacemanager.R;
 import lamit.outerspacemanager.com.outerspacemanager.event.RepositoryMessageEvent;
 import lamit.outerspacemanager.com.outerspacemanager.ui.fragment.BuildingsFragment;
+import lamit.outerspacemanager.com.outerspacemanager.ui.fragment.GalaxyFragment;
 import lamit.outerspacemanager.com.outerspacemanager.ui.fragment.MainFragment;
+import lamit.outerspacemanager.com.outerspacemanager.ui.fragment.SearchesFragment;
+import lamit.outerspacemanager.com.outerspacemanager.ui.fragment.ShipyardFragment;
 import lamit.outerspacemanager.com.outerspacemanager.viewmodel.MainViewModel;
 import timber.log.Timber;
 
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
         // Inflate layout and bind views
         setContentView(R.layout.activity_main);
         this.showMainFragment(savedInstanceState);
-        this.vm.replaceDetailFragment(new BuildingsFragment());
+        this.vm.replaceDetailFragment(this.vm.BUILDING_FRAGMENT_TAG);
         Timber.d("Layout inflated");
 
         ButterKnife.bind(this);
@@ -74,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
         this.vm.init();
 
         // Observe data mutations...
-        this.vm.getCurrentDetailFragment().observe(
+        this.vm.getCurrentDetailFragmentTag().observe(
                 this,
                 this::showDetailFragment
         );
@@ -91,11 +94,35 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
                 .commit();
     }
 
-    private void showDetailFragment(Fragment fragment) {
-        Timber.d("Switching detail fragment to %s", fragment.toString());
+    private void showDetailFragment(String tag) {
+        Timber.d("Switching detail fragment to %s", tag);
+
+        Fragment detailFragment = getSupportFragmentManager().findFragmentByTag(tag);
+
+        if(detailFragment == null){
+            switch (tag){
+                case MainViewModel.BUILDING_FRAGMENT_TAG:
+                    detailFragment = new BuildingsFragment();
+                    break;
+                case MainViewModel.SEARCHES_FRAGMENT_TAG:
+                    detailFragment = new SearchesFragment();
+                    break;
+                case MainViewModel.SHIPYARD_FRAGMENT_TAG:
+                    detailFragment = new ShipyardFragment();
+                    break;
+                case MainViewModel.GALAXY_FRAGMENT_TAG:
+                    detailFragment = new GalaxyFragment();
+                    break;
+                default:
+                    detailFragment = new BuildingsFragment();
+            }
+        }
+
+        Timber.d("Detail fragment instance hash : %s", detailFragment.toString());
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        transaction.replace(R.id.detail_container, fragment);
+        transaction.replace(R.id.detail_container, detailFragment, tag);
         transaction.addToBackStack(null);
 
         transaction.commit();
