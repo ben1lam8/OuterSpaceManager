@@ -1,6 +1,7 @@
 package lamit.outerspacemanager.com.outerspacemanager.viewmodel;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import java.util.List;
 import javax.inject.Inject;
@@ -20,6 +21,10 @@ public class ShipyardViewModel extends ViewModel {
     private ShipRepository shipRepo;
     private LiveData<List<Ship>> ships;
 
+    private MutableLiveData<Integer> amount;
+
+    private MutableLiveData<Boolean> maxMode;
+
     @Inject
     public ShipyardViewModel(UserRepository userRepo, ShipRepository shipRepo) {
         this.userRepo = userRepo;
@@ -33,6 +38,15 @@ public class ShipyardViewModel extends ViewModel {
 
         if (this.ships == null) {
             this.ships = this.shipRepo.getShips();
+        }
+
+        if (this.amount == null) {
+            this.amount = new MutableLiveData<>();
+            this.amount.setValue(1);
+        }
+
+        if (this.maxMode == null) {
+            this.maxMode = new MutableLiveData<>();
         }
     }
 
@@ -52,11 +66,29 @@ public class ShipyardViewModel extends ViewModel {
         }
     }
 
-    public void createShip(int index){
+    public void createShip(int index, int buildAmount){
 
         if (this.ships.getValue() == null || this.getUser().getValue() == null) return;
 
         Ship ship = this.ships.getValue().get(index);
-        this.shipRepo.createShip(ship, 1, this.getUser().getValue().getToken());
+        this.shipRepo.createShip(ship, buildAmount, this.getUser().getValue().getToken());
+    }
+
+    public MutableLiveData<Integer> getAmount() {
+        return amount;
+    }
+
+    public MutableLiveData<Integer> setAmount(int amount) {
+        this.amount.setValue(amount);
+        return this.amount;
+    }
+
+    public MutableLiveData<Boolean> getMaxMode() {
+        return maxMode;
+    }
+
+    public MutableLiveData<Boolean> setMaxMode(boolean maxMode) {
+        this.maxMode.setValue(maxMode);
+        return this.maxMode;
     }
 }

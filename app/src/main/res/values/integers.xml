@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="zero_button_amount">0</integer>
+    <integer name="ships_amount_zero_button_amount">0</integer>
+    <integer name="ships_amount_minus_hundred_button_amount">100</integer>
+    <integer name="ships_amount_minus_ten_button_amount">10</integer>
+    <integer name="ships_amount_minus_one_button_amount">1</integer>
+    <integer name="ships_amount_plus_one_button_amount">1</integer>
+    <integer name="ships_amount_plus_ten_button_amount">10</integer>
+    <integer name="ships_amount_plus_hundred_button_amount">100</integer>
+</resources>

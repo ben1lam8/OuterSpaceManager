@@ -1,63 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:outerSpaceManager="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="lamit.outerspacemanager.com.outerspacemanager.ui.activity.MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/main_username_textview"
+    <FrameLayout
+        android:id="@+id/main_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_username_textview"
-        android:gravity="center"
-        android:textSize="32sp"/>
-
-    <TextView
-        android:id="@+id/main_score_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_score_textview"
-        android:gravity="center"
-        android:textSize="16sp"/>
-
-    <Button
-        android:id="@+id/main_userstats_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/main_buttons_marginTop"
-        android:text="@string/main_show_map_button"/>
-
-    <Button
-        android:id="@+id/main_buildings_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_show_buildings_button"/>
-
-    <Button
-        android:id="@+id/main_fleet_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_show_fleet_button"/>
-
-    <Button
-        android:id="@+id/main_lab_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_show_lab_button"/>
-
-    <Button
-        android:id="@+id/main_shipyard_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_show_shipyard_button"/>
-
-    <Button
-        android:id="@+id/main_galaxy_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_show_galaxy_button"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

@@ -3,6 +3,7 @@ package lamit.outerspacemanager.com.outerspacemanager.data.api;
 import java.util.HashMap;
 
 import lamit.outerspacemanager.com.outerspacemanager.model.BuildingsList;
+import lamit.outerspacemanager.com.outerspacemanager.model.ReportsList;
 import lamit.outerspacemanager.com.outerspacemanager.model.SearchesList;
 import lamit.outerspacemanager.com.outerspacemanager.model.ShipsList;
 import lamit.outerspacemanager.com.outerspacemanager.model.Token;
@@ -28,7 +29,7 @@ public interface APIClient {
     Call<User> fetchPlayers(@Path("from") int from, @Path("limit") int limit, @Header("x-access-token") String token);
 
     @GET("/api/v1/reports/{from}/{limit}")
-    Call<User> fetchReports(@Path("from") int from, @Path("limit") int limit, @Header("x-access-token") String token);
+    Call<ReportsList> fetchReportsList(@Path("from") int from, @Path("limit") int limit, @Header("x-access-token") String token);
 
     // BUILDING
 

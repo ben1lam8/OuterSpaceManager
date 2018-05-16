@@ -33,14 +33,14 @@ public class SearchesListItemAdapter extends ArrayAdapter<Search>{
     }
 
     static class ViewHolder {
-        @BindView(R.id.search_item_icon_imageview)        ImageView iconImageView;
-        @BindView(R.id.search_item_level_textview)        TextView levelTextView;
-        @BindView(R.id.search_item_upgrade_progressbar)   ProgressBar upgradeProgressBar;
-        @BindView(R.id.search_item_upgrade_textview)      TextView upgradeTextView;
-        @BindView(R.id.search_item_name_textview)         TextView nameTextView;
-        @BindView(R.id.search_item_effect_textview)       TextView effectTextView;
-        @BindView(R.id.search_item_gas_textview)          TextView gasTextView;
-        @BindView(R.id.search_item_minerals_textview)      TextView mineralTextView;
+        @BindView(R.id.search_item_icon_imageview)          ImageView iconImageView;
+        @BindView(R.id.search_item_level_textview)          TextView levelTextView;
+        @BindView(R.id.search_item_upgrade_progressbar)     ProgressBar upgradeProgressBar;
+        @BindView(R.id.search_item_upgrade_textview)        TextView upgradeTextView;
+        @BindView(R.id.search_item_name_textview)           TextView nameTextView;
+        @BindView(R.id.search_item_effect_textview)         TextView effectTextView;
+        @BindView(R.id.search_item_gas_textview)            TextView gasTextView;
+        @BindView(R.id.search_item_minerals_textview)       TextView mineralTextView;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);

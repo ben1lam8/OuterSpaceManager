@@ -6,6 +6,166 @@
     android:orientation="vertical"
     tools:context="lamit.outerspacemanager.com.outerspacemanager.ui.activity.ShipyardActivity">
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/ships_amount_zero_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/building_item_amount_zero_button">
+
+                <tag
+                    android:id="@+id/ships_amount_amount_tag"
+                    android:value="@integer/ships_amount_zero_button_amount"
+                    />
+
+                <tag
+                    android:id="@+id/ships_amount_method_tag"
+                    android:value="@string/ships_amount_zero_button_method"
+                    />
+
+            </Button>
+
+            <Button
+                android:id="@+id/ships_amount_minus_hundred_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/building_item_amount_minus_hundred_button">
+
+                <tag
+                    android:id="@id/ships_amount_amount_tag"
+                    android:value="@integer/ships_amount_minus_hundred_button_amount"
+                    />
+
+                <tag
+                    android:id="@id/ships_amount_method_tag"
+                    android:value="@string/ships_amount_minus_hundred_button_method"
+                    />
+
+            </Button>
+
+            <Button
+                android:id="@+id/ships_amount_minus_ten_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/building_item_amount_minus_ten_button">
+
+                <tag
+                    android:id="@id/ships_amount_amount_tag"
+                    android:value="@integer/ships_amount_minus_ten_button_amount"
+                    />
+
+                <tag
+                    android:id="@id/ships_amount_method_tag"
+                    android:value="@string/ships_amount_minus_ten_button_method"
+                    />
+
+            </Button>
+
+            <Button
+                android:id="@+id/ships_amount_minus_one_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/building_item_amount_minus_one_button">
+
+                <tag
+                    android:id="@id/ships_amount_amount_tag"
+                    android:value="@integer/ships_amount_minus_one_button_amount"
+                    />
+
+                <tag
+                    android:id="@id/ships_amount_method_tag"
+                    android:value="@string/ships_amount_minus_one_button_method"
+                    />
+
+            </Button>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                android:text="@string/building_item_amount_textview"/>
+
+            <EditText
+                android:id="@+id/ships_amount_edittext"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="1"/>
+
+            <Button
+                android:id="@+id/ships_amount_plus_one_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/building_item_amount_plus_one_button">
+
+                <tag
+                    android:id="@id/ships_amount_amount_tag"
+                    android:value="@integer/ships_amount_plus_one_button_amount"
+                    />
+
+                <tag
+                    android:id="@id/ships_amount_method_tag"
+                    android:value="@string/ships_amount_plus_one_button_method"
+                    />
+
+            </Button>
+
+            <Button
+                android:id="@+id/ships_amount_plus_ten_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/building_item_amount_plus_ten_button">
+
+                <tag
+                    android:id="@id/ships_amount_amount_tag"
+                    android:value="@integer/ships_amount_plus_ten_button_amount"
+                    />
+
+                <tag
+                    android:id="@id/ships_amount_method_tag"
+                    android:value="@string/ships_amount_plus_ten_button_method"
+                    />
+
+            </Button>
+
+            <Button
+                android:id="@+id/ships_amount_plus_hundred_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/building_item_amount_plus_hundred_button">
+
+                <tag
+                    android:id="@id/ships_amount_amount_tag"
+                    android:value="@integer/ships_amount_plus_hundred_button_amount"
+                    />
+
+                <tag
+                    android:id="@id/ships_amount_method_tag"
+                    android:value="@string/ships_amount_plus_hundred_button_method"
+                    />
+
+            </Button>
+
+            <ToggleButton
+                android:id="@+id/ships_amount_max_togglebutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="@string/ships_item_max_on_togglebutton"
+                android:textOff="@string/ships_item_max_off_togglebutton"/>
+
+        </TableRow>
+    </TableLayout>
+
     <ListView
         android:id="@+id/ships_listview"
         android:layout_width="match_parent"

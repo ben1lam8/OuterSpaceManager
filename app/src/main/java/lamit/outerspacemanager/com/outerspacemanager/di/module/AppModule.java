@@ -26,6 +26,7 @@ import lamit.outerspacemanager.com.outerspacemanager.data.room.UserDao;
 import lamit.outerspacemanager.com.outerspacemanager.di.annotation.AppContext;
 import lamit.outerspacemanager.com.outerspacemanager.di.builder.ViewModelBuilder;
 import lamit.outerspacemanager.com.outerspacemanager.repository.BuildingRepository;
+import lamit.outerspacemanager.com.outerspacemanager.repository.ReportRepository;
 import lamit.outerspacemanager.com.outerspacemanager.repository.SearchRepository;
 import lamit.outerspacemanager.com.outerspacemanager.repository.ShipRepository;
 import lamit.outerspacemanager.com.outerspacemanager.repository.UserRepository;
@@ -100,6 +101,12 @@ public class AppModule {
         return new SearchRepository(appContext, apiClient, searchDao, executor);
     }
 
+    @Provides
+    @Singleton
+    ReportRepository provideReportRepository(@AppContext Context appContext, APIClient apiClient, Executor executor) {
+        return new ReportRepository(appContext, apiClient, executor);
+    }
+
     // --- PROVIDE NETWORK FACTORIES ---
 
     private static String BASE_URL = "https://outer-space-manager-staging.herokuapp.com";
@@ -109,7 +116,14 @@ public class AppModule {
         return new GsonBuilder()
                 .registerTypeAdapter(
                         Date.class,
-                        (JsonDeserializer<Date>) (json, typeOfT, context) -> new Date(json.getAsJsonPrimitive().getAsLong()))
+                        (JsonDeserializer<Date>) (json, typeOfT, context) -> {
+
+                            if (json.getAsString().length() == 13){
+                                return new Date(json.getAsJsonPrimitive().getAsLong());
+                            }else{
+                                return new Date(json.getAsJsonPrimitive().getAsLong()*1000);
+                            }
+                        })
                 .create();
     }
 

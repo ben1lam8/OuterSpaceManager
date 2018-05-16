@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
         // Inflate layout and bind views
         setContentView(R.layout.activity_main);
         this.showMainFragment(savedInstanceState);
-        this.vm.replaceDetailFragment(this.vm.BUILDING_FRAGMENT_TAG);
+        this.vm.replaceDetailFragment(MainViewModel.BUILDING_FRAGMENT_TAG);
         Timber.d("Layout inflated");
 
         ButterKnife.bind(this);

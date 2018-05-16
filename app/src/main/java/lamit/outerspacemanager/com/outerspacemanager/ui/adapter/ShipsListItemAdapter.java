@@ -17,6 +17,11 @@ import lamit.outerspacemanager.com.outerspacemanager.R;
 
 public class ShipsListItemAdapter extends ArrayAdapter<Ship>{
 
+    private double userCurrentGas;
+    private double userCurrentMinerals;
+    private int currentAmount;
+    private boolean maxMode;
+
     public ShipsListItemAdapter(Context context){
         super(context, 0);
     }
@@ -24,6 +29,24 @@ public class ShipsListItemAdapter extends ArrayAdapter<Ship>{
     public void setObjects(List<Ship> shipsList){
         this.clear();
         this.addAll(shipsList);
+    }
+
+    public void setCurrentAmount(int amount){
+        this.currentAmount = amount;
+        this.notifyDataSetChanged();
+    }
+
+    public void setUserCurrentGas(double userCurrentGas){
+        this.userCurrentGas = userCurrentGas;
+    }
+
+    public void setUserCurrentMinerals(double userCurrentMinerals){
+        this.userCurrentMinerals = userCurrentMinerals;
+    }
+
+    public void setMaxMode(boolean maxMode){
+        this.maxMode = maxMode;
+        this.notifyDataSetChanged();
     }
 
     static class ViewHolder {
@@ -49,11 +72,11 @@ public class ShipsListItemAdapter extends ArrayAdapter<Ship>{
 
         ShipsListItemAdapter.ViewHolder holder;
         if (convertView != null) {
-            holder = (ShipsListItemAdapter.ViewHolder) convertView.getTag();
+            holder = (ShipsListItemAdapter.ViewHolder) convertView.getTag(R.id.ship_item_view_tag);
         } else {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_ship, parent, false);
             holder = new ShipsListItemAdapter.ViewHolder(convertView);
-            convertView.setTag(holder);
+            convertView.setTag(R.id.ship_item_view_tag, holder);
         }
 
         Ship currentShip = getItem(position);
@@ -78,10 +101,19 @@ public class ShipsListItemAdapter extends ArrayAdapter<Ship>{
 
         holder.nameTextView.setText(currentShip.getName());
 
+        double maxAmountByGas = this.userCurrentGas / currentShip.getGasCost();
+        double maxAmountByMinerals = this.userCurrentMinerals / currentShip.getMineralCost();
+
+        int maxAmount = (int) Math.min(maxAmountByGas, maxAmountByMinerals);
+
+        int buildAmount = this.currentAmount > maxAmount ? maxAmount : this.currentAmount;
+        buildAmount = this.maxMode ? maxAmount : buildAmount;
+        convertView.setTag(R.id.ship_item_build_amount_tag, buildAmount);
+
         int pendingAmount = currentShip.getTotalAmount() - currentShip.getBuiltAmount();
         holder.amountTextView.setText(getContext().getString(R.string.ship_item_amount, currentShip.getBuiltAmount(), pendingAmount));
 
-        holder.createTextView.setText(getContext().getString(R.string.ship_item_create, currentShip.getTimeToBuild()));
+        holder.createTextView.setText(getContext().getString(R.string.ship_item_create, buildAmount, currentShip.getTimeToBuild()));
 
         holder.lifeTextView.setText(getContext().getString(R.string.ship_item_life, currentShip.getLife()));
 

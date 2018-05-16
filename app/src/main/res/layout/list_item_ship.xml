@@ -9,6 +9,10 @@
     android:paddingLeft="4dp"
     android:paddingRight="4dp">
 
+    <tag android:id="@+id/ship_item_view_tag" />
+
+    <tag android:id="@+id/ship_item_build_amount_tag" />
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="3"
@@ -46,11 +50,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="18sp"
+            android:textSize="16sp"
             tools:text="CONSTRUIRE (xx s.)"
             />
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="0dp"
