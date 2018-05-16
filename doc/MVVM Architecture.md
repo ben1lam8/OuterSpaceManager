@@ -25,7 +25,7 @@
 
 The MVVM Pattern aims to expose only useful data to activities and fragments.
 
-![MVVM Pattern](images/mvvm1.jpeg?raw=true "MVVM Pattern")
+![MVVM Pattern](images/mvvm1.png?raw=true "MVVM Pattern")
 
 In a MVVM Pattern, the activity/fragment role is to manage UI events and read/write the data exposed by its ViewModel.
 
